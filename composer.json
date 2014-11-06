@@ -1,7 +1,7 @@
 {
-    "name": "zfcampus/zf-apigility-doctrine",
+    "name": "zfcampus/zf-doctrine-querybuilder-filter",
     "type": "library",
-    "description": "Doctrine for Apigility",
+    "description": "Doctrine QueryBuilder Filters",
     "keywords": [
         "apigility",
         "doctrine",
@@ -12,7 +12,7 @@
     "authors": [
         {
             "name": "Tom Anderson",
-            "email": "tanderson@soliantconsulting.com"
+            "email": "tom.h.anderson@gmail.com"
         }
     ],
     "require-dev": {
@@ -26,19 +26,20 @@
         "satooshi/php-coveralls": "dev-master",
         "doctrine/doctrine-orm-module": "*",
         "doctrine/doctrine-mongo-odm-module": "*",
-        "doctrine/mongodb-odm": "~1.0.0"
+        "doctrine/mongodb-odm": "~1.0.0",
+        "phpro/zf-doctrine-hydration-module": "~0.1.0",
+        "zfcampus/zf-apigility": "~1.0",
+        "zfcampus/zf-apigility-doctrine": "dev-master"
     },
     "require": {
-        "php": ">=5.4",
-        "phpro/zf-doctrine-hydration-module": "~0.1.0",
-        "zfcampus/zf-apigility": "~1.0"
+        "php": ">=5.4"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
-            "ZF\\Apigility\\Doctrine\\": "src/",
-            "ZFTest\\Apigility\\Doctrine\\": "test/src/"
+            "ZF\\Doctrine\\QueryBuilder\\Filter\\": "src/",
+            "ZFTest\\Doctrine\\QueryBuilder\\Filter\\": "test/src/"
         }
     }
 }

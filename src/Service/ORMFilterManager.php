@@ -1,12 +1,12 @@
 <?php
 
-namespace ZF\Apigility\Doctrine\Server\Collection\Service;
+namespace ZF\Doctrine\QueryBuilder\Filter\Service;
 
+use ZF\Apigility\Doctrine\Server\Collection\Filter\FilterInterface;
 use Zend\ServiceManager\AbstractPluginManager;
 use Zend\ServiceManager\Exception;
-use ZF\Apigility\Doctrine\Server\Collection\Query\ApigilityFetchAllQuery;
 
-class QueryManager extends AbstractPluginManager
+class ORMFilterManager extends AbstractPluginManager
 {
     protected $invokableClasses = array();
 
@@ -18,15 +18,16 @@ class QueryManager extends AbstractPluginManager
      */
     public function validatePlugin($filter)
     {
-        if ($filter instanceof ApigilityFetchAllQuery) {
+        if ($filter instanceof FilterInterface) {
             // we're okay
             return;
         }
 
         // @codeCoverageIgnoreStart
         throw new Exception\RuntimeException(sprintf(
-            'Plugin of type %s is invalid; must implement ApigilityFetchAllQuery',
-            (is_object($filter) ? get_class($filter) : gettype($filter))
+            'Plugin of type %s is invalid; must implement %s\Plugin\PluginInterface',
+            (is_object($filter) ? get_class($filter) : gettype($filter)),
+            __NAMESPACE__
         ));
         // @codeCoverageIgnoreEnd
     }

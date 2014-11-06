@@ -4,7 +4,7 @@
  * @copyright Copyright (c) 2013 Zend Technologies USA Inc. (http://www.zend.com)
  */
 
-namespace ZF\Apigility\Doctrine\Server;
+namespace ZF\Doctrine\QueryBuilder\Filter;
 
 use Zend\ModuleManager\Feature\DependencyIndicatorInterface;
 use Zend\ModuleManager\ModuleManager;
@@ -34,24 +34,17 @@ class Module
         $serviceListener = $sm->get('ServiceListener');
 
         $serviceListener->addServiceManager(
-            'ZfOrmCollectionFilterManager',
-            'zf-orm-collection-filter',
-            'ZF\Apigility\Doctrine\Server\Collection\Filter\FilterInterface',
+            'ZfDoctrineQueryBuilderFilterManagerOrm',
+            'zf-doctrine-querybuilder-filter-orm',
+            'ZF\Doctrine\QueryBuilder\Filter\FilterInterface',
             'getZfOrmFilterConfig'
         );
 
         $serviceListener->addServiceManager(
-            'ZfOdmCollectionFilterManager',
-            'zf-odm-collection-filter',
-            'ZF\Apigility\Doctrine\Server\Collection\Filter\FilterInterface',
+            'ZfDoctrineQueryBuilderFilterManagerOdm',
+            'zf-doctrine-querybuilder-filter-odm',
+            'ZF\Doctrine\QueryBuilder\Filter\FilterInterface',
             'getZfOdmFilterConfig'
-        );
-
-        $serviceListener->addServiceManager(
-            'ZfCollectionQueryManager',
-            'zf-collection-query',
-            'ZF\Apigility\Doctrine\Server\Collection\Query\ApigilityFetchAllQuery',
-            'getZfCollectionQueryConfig'
         );
     }
 
@@ -62,6 +55,6 @@ class Module
      */
     public function getModuleDependencies()
     {
-        return ['Phpro\DoctrineHydrationModule'];
+#        return ['Phpro\DoctrineHydrationModule'];
     }
 }
