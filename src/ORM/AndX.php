@@ -23,11 +23,12 @@ class AndX extends AbstractFilter
         $qb = $em->createQueryBuilder();
 
         foreach ($option['conditions'] as $condition) {
-            $filter = $this->getFilterManager()->get(strtolower($condition['type']), [$this->getFilterManager()]);
+            $filter = $this->getFilterManager()->get(strtolower($condition['type']), array($this->getFilterManager()));
             $filter->filter($qb, $metadata, $condition);
         }
 
-        $andX->addMultiple($qb->getDqlParts()['where']->getParts());
+        $dqlParts = $qb->getDqlParts();
+        $andX->addMultiple($dqlParts['where']->getParts());
         $queryBuilder->setParameters($qb->getParameters());
 
         $queryBuilder->$queryType($andX);
