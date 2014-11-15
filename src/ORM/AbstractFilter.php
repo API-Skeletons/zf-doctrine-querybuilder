@@ -1,9 +1,9 @@
 <?php
 
-namespace ZF\Apigility\Doctrine\Server\Collection\Filter\ORM;
+namespace ZF\Doctrine\QueryBuilder\Filter\ORM;
 
-use ZF\Apigility\Doctrine\Server\Collection\Filter\FilterInterface;
-use ZF\Apigility\Doctrine\Server\Collection\Service\ORMFilterManager;
+use ZF\Doctrine\QueryBuilder\Filter\FilterInterface;
+use ZF\Doctrine\QueryBuilder\Filter\Service\ORMFilterManager;
 
 abstract class AbstractFilter implements FilterInterface
 {
@@ -29,11 +29,11 @@ abstract class AbstractFilter implements FilterInterface
 
     protected function typeCastField($metadata, $field, $value, $format, $doNotTypecastDatetime = false)
     {
-        if (!isset($metadata['fieldMappings'][$field])) {
+        if (!isset($metadata->fieldMappings[$field])) {
             return $value;
         }
 
-        switch ($metadata['fieldMappings'][$field]['type']) {
+        switch ($metadata->fieldMappings[$field]['type']) {
             case 'string':
                 settype($value, 'string');
                 break;

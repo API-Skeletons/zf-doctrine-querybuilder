@@ -1,14 +1,35 @@
 <?php
 
-namespace ZF\Apigility\Doctrine\Server\Collection\Service;
+namespace ZF\Doctrine\QueryBuilder\Filter\Service;
 
-use ZF\Apigility\Doctrine\Server\Collection\Filter\FilterInterface;
+use ZF\Doctrine\QueryBuilder\Filter\FilterInterface;
 use Zend\ServiceManager\AbstractPluginManager;
 use Zend\ServiceManager\Exception;
+use Doctrine\ODM\MongoDB\Query\Builder as QueryBuilder;
+use Doctrine\ODM\MongoDB\Mapping\ClassMetadata as Metadata;
 
 class ODMFilterManager extends AbstractPluginManager
 {
     protected $invokableClasses = array();
+
+    public function filter(QueryBuilder $queryBuilder, Metadata $metadata, $filters)
+    {
+        foreach ($filters as $option) {
+            if (!isset($option['type']) or !$option['type']) {
+            // @codeCoverageIgnoreStart
+                return new ApiProblem(500, 'Array element "type" is required for all filters');
+            }
+            // @codeCoverageIgnoreEnd
+            try {
+                $filter = $this->get(strtolower($option['type']), [$this]);
+            } catch (\Zend\ServiceManager\Exception\ServiceNotFoundException $e) {
+            // @codeCoverageIgnoreStart
+                return new ApiProblem(500, $e->getMessage());
+            }
+            // @codeCoverageIgnoreEnd
+            $filter->filter($queryBuilder, $metadata, $option);
+        }
+    }
 
     /**
      * @param mixed $filter

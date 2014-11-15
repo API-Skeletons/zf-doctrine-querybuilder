@@ -1,6 +1,6 @@
 <?php
 
-namespace ZF\Apigility\Doctrine\Server\Collection\Filter\ORM;
+namespace ZF\Doctrine\QueryBuilder\Filter\ORM;
 
 class NotIn extends AbstractFilter
 {

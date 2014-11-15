@@ -1,6 +1,6 @@
 <?php
 
-namespace ZF\Apigility\Doctrine\Server\Collection\Filter;
+namespace ZF\Doctrine\QueryBuilder\Filter;
 
 interface FilterInterface
 {

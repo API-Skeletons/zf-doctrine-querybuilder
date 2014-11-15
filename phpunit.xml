@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit bootstrap="./test/Bootstrap.php" colors="true">
     <testsuites>
-        <testsuite name="server-orm">
-            <directory>./test/src/Server/ORM/Setup</directory>
-            <directory>./test/src/Server/ORM/Collection</directory>
+        <testsuite name="orm">
+            <file>./ORMFilterTest.php</file>
         </testsuite>
-        <testsuite name="server-odm">
-            <directory>./test/src/Server/ODM/Setup</directory>
-            <directory>./test/src/Server/ODM/Collection</directory>
+        <testsuite name="odm">
+            <file>./ODMFilterTest.php</file>
         </testsuite>
     </testsuites>
 

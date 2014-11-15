@@ -1,6 +1,6 @@
 <?php
 
-namespace ZF\Apigility\Doctrine\Server\Collection\Filter\ORM;
+namespace ZF\Doctrine\QueryBuilder\Filter\ORM;
 
 use Exception;
 
@@ -24,6 +24,32 @@ class InnerJoin extends AbstractFilter
             $option['parentAlias'] = 'row';
         }
 
-        $queryBuilder->innerJoin($option['parentAlias'] . '.' . $option['field'], $option['alias']);
+        if (!isset($option['conditionType']) and isset($option['condition'])) {
+            throw new Exception('A conditionType must be specified for a condition');
+        }
+
+        if (!isset($option['condition']) and isset($option['conditionType'])) {
+            throw new Exception('A condition must be specified for a conditionType');
+        }
+
+        if (!isset($option['conditionType'])) {
+            $option['conditionType'] = null;
+        }
+
+        if (!isset($option['condition'])) {
+            $option['condition'] = null;
+        }
+
+        if (!isset($option['indexBy'])) {
+            $option['indexBy'] = null;
+        }
+
+        $queryBuilder->innerJoin(
+            $option['parentAlias'] . '.' . $option['field'],
+            $option['alias'],
+            $option['conditionType'],
+            $option['condition'],
+            $option['indexBy']
+        );
     }
 }

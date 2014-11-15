@@ -25,26 +25,27 @@ class Module
 
     public function getConfig()
     {
-        return include __DIR__ . '/../../config/server.config.php';
+        return include __DIR__ . '/../config/server.config.php';
     }
 
     public function init(ModuleManager $moduleManager)
     {
-        $sm = $moduleManager->getEvent()->getParam('ServiceManager');
-        $serviceListener = $sm->get('ServiceListener');
+
+        $serviceManager = $moduleManager->getEvent()->getParam('ServiceManager');
+        $serviceListener = $serviceManager->get('ServiceListener');
 
         $serviceListener->addServiceManager(
             'ZfDoctrineQueryBuilderFilterManagerOrm',
             'zf-doctrine-querybuilder-filter-orm',
             'ZF\Doctrine\QueryBuilder\Filter\FilterInterface',
-            'getZfOrmFilterConfig'
+            'getDoctrineQueryBuilderFilterOrmConfig'
         );
 
         $serviceListener->addServiceManager(
             'ZfDoctrineQueryBuilderFilterManagerOdm',
             'zf-doctrine-querybuilder-filter-odm',
             'ZF\Doctrine\QueryBuilder\Filter\FilterInterface',
-            'getZfOdmFilterConfig'
+            'getDoctrineQueryBuilderFilterOdmConfig'
         );
     }
 
@@ -55,6 +56,6 @@ class Module
      */
     public function getModuleDependencies()
     {
-#        return ['Phpro\DoctrineHydrationModule'];
+        return ['DoctrineModule'];
     }
 }

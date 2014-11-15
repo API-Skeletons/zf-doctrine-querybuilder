@@ -7,8 +7,8 @@
 return array(
     'service_manager' => array(
         'factories' => array(
-            'ZfOrmQueryBuilderFilterManager' => 'ZF\Doctrine\QueryBuilder\Filter\Service\ORMFilterManagerFactory',
-            'ZfOdmQueryBuilderFilterManager' => 'ZF\Doctrine\QueryBuilder\Filter\Service\ODMFilterManagerFactory',
+            'ZfDoctrineQueryBuilderFilterManagerOrm' => 'ZF\Doctrine\QueryBuilder\Filter\Service\ORMFilterManagerFactory',
+            'ZfDoctrineQueryBuilderFilterManagerOdm' => 'ZF\Doctrine\QueryBuilder\Filter\Service\ODMFilterManagerFactory',
         ),
     ),
 );

@@ -1,8 +1,9 @@
 <?php
 
-namespace ZF\Apigility\Doctrine\Server\Collection\Filter\ODM;
+namespace ZF\Doctrine\QueryBuilder\Filter\ODM;
 
-use ZF\Apigility\Doctrine\Server\Collection\Filter\FilterInterface;
+use ZF\Doctrine\QueryBuilder\Filter\FilterInterface;
+use DateTime;
 
 abstract class AbstractFilter implements FilterInterface
 {
@@ -10,11 +11,11 @@ abstract class AbstractFilter implements FilterInterface
 
     protected function typeCastField($metadata, $field, $value, $format = null, $doNotTypecastDatetime = false)
     {
-        if (!isset($metadata['fieldMappings'][$field])) {
+        if (!isset($metadata->fieldMappings[$field])) {
             return $value;
         }
 
-        switch ($metadata['fieldMappings'][$field]['type']) {
+        switch ($metadata->fieldMappings[$field]['type']) {
             case 'int':
                 settype($value, 'integer');
                 break;
@@ -46,7 +47,7 @@ abstract class AbstractFilter implements FilterInterface
                     if (!$format) {
                         $format = 'Y-m-d H:i:s';
                     }
-                    $value = \DateTime::createFromFormat($format, $value);
+                    $value = DateTime::createFromFormat($format, $value);
                 }
                 break;
             case 'file':

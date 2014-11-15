@@ -1,10 +1,10 @@
 <?php
 
-namespace ZF\Apigility\Doctrine\Server\Collection\Service;
+namespace ZF\Doctrine\QueryBuilder\Filter\Service;
 
 use Zend\Mvc\Service\AbstractPluginManagerFactory;
 
 class ODMFilterManagerFactory extends AbstractPluginManagerFactory
 {
-    const PLUGIN_MANAGER_CLASS = 'ZF\Apigility\Doctrine\Server\Collection\Service\ODMFilterManager';
+    const PLUGIN_MANAGER_CLASS = 'ZF\Doctrine\QueryBuilder\Filter\Service\ODMFilterManager';
 }

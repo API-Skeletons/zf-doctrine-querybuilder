@@ -1,5 +1,5 @@
 DbMongo\Document\Meta:
-  db: zf_apigility_doctrine_server_test
+  db: zf_doctrine_querybuilder_filter_test
   collection: meta
   repositoryClass: DbMongo\Repository\MetaRepository
   fields:

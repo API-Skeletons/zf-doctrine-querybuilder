@@ -2,13 +2,29 @@
 
 namespace ZF\Doctrine\QueryBuilder\Filter\Service;
 
-use ZF\Apigility\Doctrine\Server\Collection\Filter\FilterInterface;
+use ZF\Doctrine\QueryBuilder\Filter\FilterInterface;
 use Zend\ServiceManager\AbstractPluginManager;
 use Zend\ServiceManager\Exception;
+use Doctrine\ORM\QueryBuilder;
 
 class ORMFilterManager extends AbstractPluginManager
 {
     protected $invokableClasses = array();
+
+    public function filter(QueryBuilder $queryBuilder, $metadata, $filters)
+    {
+        foreach ($filters as $option) {
+            if (!isset($option['type']) or !$option['type']) {
+            // @codeCoverageIgnoreStart
+                throw new Exception\RuntimeException('Array element "type" is required for all filters');
+            }
+            // @codeCoverageIgnoreEnd
+
+            $filter = $this->get(strtolower($option['type']), [$this]);
+
+            $filter->filter($queryBuilder, $metadata, $option);
+        }
+    }
 
     /**
      * @param mixed $filter

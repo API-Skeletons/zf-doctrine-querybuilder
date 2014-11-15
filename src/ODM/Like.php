@@ -1,6 +1,6 @@
 <?php
 
-namespace ZF\Apigility\Doctrine\Server\Collection\Filter\ODM;
+namespace ZF\Doctrine\QueryBuilder\Filter\ODM;
 
 class Like extends AbstractFilter
 {

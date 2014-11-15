@@ -2,8 +2,8 @@ Doctrine QueryBuilder Filters
 ==============================
 
 [![Build status](https://api.travis-ci.org/zfcampus/zf-doctrine-querybuilder-filter.svg)](http://travis-ci.org/zfcampus/zf-doctrine-querybuilder-filter) 
+This library provides query builder filters from request query parameters.
 
-This module provides the classes for integrating Doctrine with Apigility.
 
 Installation
 ------------
@@ -14,8 +14,24 @@ Installation of this module uses composer. For composer documentation, please re
 ```sh
 $ php composer.phar require zfcampus/zf-doctrine-querybuilder-filter:dev-master
 ```
+Add ```ZF\Doctrine\QueryBuilder\Filter``` to your application.config.php list of modules.
 
-This library provides query builder filters from request query parameters.
+
+Configuring the Module
+----------------------
+Copy ```config/zf-doctrine-querybuilder-filter.global.php.dist``` to ```config/autoload/zf-doctrine-querybuilder-filter.global.php``` and edit the list of invokables for orm and odm to those you want enabled by default.
+
+The filters you enable by default will be available to anyone with access to a route which uses the filters.
+
+
+Configuring the Filter Manager per use
+--------------------------------------
+If you have filters you want enabled on a per-use basis, particular to a route, you may configure the filter manager manually.
+
+$filterManager = $this->getServiceLocator()->get('ZfDoctrineOrmQueryBuilderFilterManager');
+
+$filterManager->add
+
 
 
 Querying Collections
