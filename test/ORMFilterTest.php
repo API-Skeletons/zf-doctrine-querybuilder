@@ -95,11 +95,6 @@ class FiltersTest extends AbstractHttpControllerTestCase
         $objectManager->flush();
     }
 
-    public function getStart()
-    {
-        $this->assertTrue(true);
-    }
-
     public function testOrX()
     {
         $filters = array(

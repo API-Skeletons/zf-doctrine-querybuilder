@@ -2,7 +2,7 @@ Doctrine QueryBuilder Filters
 ==============================
 
 [![Build status](https://api.travis-ci.org/zfcampus/zf-doctrine-querybuilder-filter.svg)](http://travis-ci.org/zfcampus/zf-doctrine-querybuilder-filter) 
-This library provides query builder filters from request query parameters.
+This library provides query builder filters from array parameters.  This library was designed to apply filters from an HTTP request to give an API a fluent filter dialect.
 
 
 Installation
@@ -23,28 +23,37 @@ Copy ```config/zf-doctrine-querybuilder-filter.global.php.dist``` to ```config/a
 
 The filters you enable by default will be available to anyone with access to a route which uses the filters.
 
-
-Configuring the Filter Manager per use
---------------------------------------
-If you have filters you want enabled on a per-use basis, particular to a route, you may configure the filter manager manually.
-
-$filterManager = $this->getServiceLocator()->get('ZfDoctrineOrmQueryBuilderFilterManager');
-
-$filterManager->add
+Use
+---
+```php
+$filters = array(
+    array('field' =>'name', 'type'=>'eq', 'value' => 'ArtistOne'),
+);
 
 
+$serviceManager = $this->getApplication()->getServiceManager();
+$filterManager = $serviceManager->get('ZfDoctrineQueryBuilderFilterManagerOrm');
+$objectManager = $serviceManager->get('doctrine.entitymanager.orm_default');
+$queryBuilder = $objectManager->createQueryBuilder();
+$queryBuilder->select('row')
+    ->from($entity, 'row')
+;
+$filterManager->filter($queryBuilder, $objectManager->getMetadataFactory()->getAllMetadata()[0], $filters);
+```
 
-Querying Collections
+The $filters array is intened to come from the request.
+
+
+
+Filters
 --------------------
 
-Queries are not simple key=value pairs.  The query parameter is a key-less array of query
+Filters are not simple key=value pairs.  Filters are a key-less array of query
 definitions.  Each query definition is an array and the array values vary for each query type.
 
-Each query type requires at a minimum a 'type' and a 'field'.  Each query may also specify
-a 'where' which can be either 'and' or 'or'.  Embedded logic such as and(x or y) is supported
-through AndX and OrX query types.
+Each query definition requires at a minimum a 'type' and a 'field'.  Each query may also specify a 'where' which can be either 'and' or 'or'.  Embedded logic such as and(x or y) is supported through AndX and OrX query types.
 
-Building HTTP GET query with PHP.  Use this to help build your queries.
+Building HTTP GET query: 
 
 PHP Example
 ```php
