@@ -1,6 +1,12 @@
 <?php
+/**
+ * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
+ * @copyright Copyright (c) 2014 Zend Technologies USA Inc. (http://www.zend.com)
+ */
 
 namespace ZF\Doctrine\QueryBuilder\Filter\ODM;
+
+use MongoRegex;
 
 class Regex extends AbstractFilter
 {
@@ -8,13 +14,18 @@ class Regex extends AbstractFilter
     {
         $queryType = 'addAnd';
         if (isset($option['where'])) {
-            if ($option['where'] == 'and') {
+            if ($option['where'] === 'and') {
                 $queryType = 'addAnd';
-            } elseif ($option['where'] == 'or') {
+            } elseif ($option['where'] === 'or') {
                 $queryType = 'addOr';
             }
         }
 
-        $queryBuilder->$queryType($queryBuilder->expr()->field($option['field'])->equals(new \MongoRegex($option['value'])));
+        $queryBuilder->$queryType(
+            $queryBuilder
+                ->expr()
+                ->field($option['field'])
+                ->equals(new MongoRegex($option['value']))
+        );
     }
 }

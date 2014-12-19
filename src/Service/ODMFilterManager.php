@@ -1,7 +1,12 @@
 <?php
+/**
+ * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
+ * @copyright Copyright (c) 2014 Zend Technologies USA Inc. (http://www.zend.com)
+ */
 
 namespace ZF\Doctrine\QueryBuilder\Filter\Service;
 
+use ZF\ApiProblem\ApiProblem;
 use ZF\Doctrine\QueryBuilder\Filter\FilterInterface;
 use Zend\ServiceManager\AbstractPluginManager;
 use Zend\ServiceManager\Exception;
@@ -15,17 +20,19 @@ class ODMFilterManager extends AbstractPluginManager
     public function filter(QueryBuilder $queryBuilder, Metadata $metadata, $filters)
     {
         foreach ($filters as $option) {
-            if (!isset($option['type']) or !$option['type']) {
+            if (! isset($option['type']) or ! $option['type']) {
             // @codeCoverageIgnoreStart
                 return new ApiProblem(500, 'Array element "type" is required for all filters');
             }
             // @codeCoverageIgnoreEnd
+
             try {
                 $filter = $this->get(strtolower($option['type']), [$this]);
-            } catch (\Zend\ServiceManager\Exception\ServiceNotFoundException $e) {
+            } catch (Exception\ServiceNotFoundException $e) {
             // @codeCoverageIgnoreStart
                 return new ApiProblem(500, $e->getMessage());
             }
+
             // @codeCoverageIgnoreEnd
             $filter->filter($queryBuilder, $metadata, $option);
         }

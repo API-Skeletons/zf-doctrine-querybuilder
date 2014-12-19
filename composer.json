@@ -3,11 +3,15 @@
     "type": "library",
     "description": "QueryBuilder filters for Doctrine",
     "keywords": [
+        "api",
+        "apigility",
         "doctrine",
         "filter",
-        "api"
+        "module",
+        "zend",
+        "zf2"
     ],
-    "homepage": "https://github.com/TomHAnderson/zf-doctrine-querybuilder-filter",
+    "homepage": "https://github.com/zfcampus/zf-doctrine-querybuilder-filter",
     "license": "BSD-3-Clause",
     "authors": [
         {
@@ -16,13 +20,45 @@
         }
     ],
     "require": {
-        "php": ">=5.4"
+        "php": ">=5.3.23",
+        "doctrine/doctrine-module": "~0.8@dev",
+        "zendframework/zend-modulemanager": "~2.3",
+        "zendframework/zend-mvc": "~2.3",
+        "zendframework/zend-servicemanager": "~2.3",
+        "zfcampus/zf-api-problem": "~1.0"
+    },
+    "require-dev": {
+        "doctrine/doctrine-mongo-odm-module": "0.*@dev",
+        "doctrine/doctrine-orm-module": "0.*@dev",
+        "fabpot/php-cs-fixer": "~1.0",
+        "phpunit/phpunit": "~4.1",
+        "zendframework/zend-test": "~2.3",
+        "zfcampus/zf-apigility-provider": "~1.0"
+    },
+    "suggest": {
+        "ext/mongo": "Mongo extension, if using ODM",
+        "doctrine/doctrine-mongo-odm-module": "v0.*, if you wish to use the Doctrine ODM",
+        "doctrine/doctrine-orm-module": "v0.*, if you wish to use the Doctrine ORM"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "ZF\\Doctrine\\QueryBuilder\\Filter\\": "src/"
+        },
+        "classmap": [
+          "Module.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ZFTest\\Doctrine\\QueryBuilder\\Filter\\": "test/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev",
+            "dev-develop": "1.1-dev"
         }
     }
 }

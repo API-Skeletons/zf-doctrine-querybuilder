@@ -1,4 +1,8 @@
 <?php
+/**
+ * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
+ * @copyright Copyright (c) 2014 Zend Technologies USA Inc. (http://www.zend.com)
+ */
 
 namespace ZF\Doctrine\QueryBuilder\Filter\ODM;
 
@@ -11,7 +15,7 @@ abstract class AbstractFilter implements FilterInterface
 
     protected function typeCastField($metadata, $field, $value, $format = null, $doNotTypecastDatetime = false)
     {
-        if (!isset($metadata->fieldMappings[$field])) {
+        if (! isset($metadata->fieldMappings[$field])) {
             return $value;
         }
 
@@ -43,8 +47,8 @@ abstract class AbstractFilter implements FilterInterface
             case 'custom_id':
                 break;
             case 'date':
-                if ($value and !$doNotTypecastDatetime) {
-                    if (!$format) {
+                if ($value && ! $doNotTypecastDatetime) {
+                    if (! $format) {
                         $format = 'Y-m-d H:i:s';
                     }
                     $value = DateTime::createFromFormat($format, $value);
