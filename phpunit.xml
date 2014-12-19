@@ -2,10 +2,10 @@
 <phpunit bootstrap="./test/Bootstrap.php" colors="true">
     <testsuites>
         <testsuite name="orm">
-            <file>./ORMFilterTest.php</file>
+            <file>./test/ORMFilterTest.php</file>
         </testsuite>
         <testsuite name="odm">
-            <file>./ODMFilterTest.php</file>
+            <file>./test/ODMFilterTest.php</file>
         </testsuite>
     </testsuites>
 

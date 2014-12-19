@@ -7,7 +7,7 @@ use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 use DateTime;
 use Db\Entity;
 
-class FiltersTest extends AbstractHttpControllerTestCase
+class ORMFilterTest extends AbstractHttpControllerTestCase
 {
     private function countResult($filters, $entity = 'Db\Entity\Artist')
     {
@@ -159,7 +159,6 @@ class FiltersTest extends AbstractHttpControllerTestCase
         );
 
         $this->assertEquals(2, $this->countResult($filters));
-
     }
 
     public function testEquals()
@@ -522,6 +521,5 @@ class FiltersTest extends AbstractHttpControllerTestCase
         );
 
         $this->assertEquals(2, $this->countResult($filters, 'Db\Entity\Album'));
-
     }
 }

@@ -1,7 +1,15 @@
 language: php
+
 php:
-  - 5.5
+  - 5.3
   - 5.4
+  - 5.5
+  - 5.6
+  - hhvm
+
+matrix:
+  allow_failures:
+      - php: hhvm
 
 before_script:
   - phpenv config-add .travis-config.ini
@@ -9,7 +17,15 @@ before_script:
   - pecl install -f mongo-1.4.1
   - composer install --dev --prefer-source --no-interaction
 
+script:
+  - ./vendor/bin/phpunit
+  - ./vendor/bin/php-cs-fixer -v fix . --dry-run --config-file ./.php_cs --level=psr2
+
 after_script:
 
 services: 
   - mongodb
+
+notifications:
+  irc: "irc.freenode.org#apigility-dev"
+  email: false

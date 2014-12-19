@@ -40,5 +40,4 @@ class Module implements ApigilityProviderInterface, BootstrapListenerInterface
         $eventCatcher = $serviceManager->get('General\Listener\EventCatcher');
         $sharedEventManager->attachAggregate($eventCatcher);
     }
-
 }

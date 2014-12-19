@@ -4,7 +4,7 @@
  * @copyright Copyright (c) 2014 Zend Technologies USA Inc. (http://www.zend.com)
  */
 
-namespace ZFTest\Apigility\Admin;
+namespace ZFTest\Doctrine\QueryBuilder\Filter;
 
 use Zend\Loader\AutoloaderFactory;
 use RuntimeException;
@@ -50,7 +50,7 @@ class Bootstrap
                 'Zend\Loader\StandardAutoloader' => array(
                     'autoregister_zf' => true,
                     'namespaces' => array(
-                        'ZF\Apigility\Doctrine' => __DIR__ . '/../src',
+                        'ZFTest\Doctrine\QueryBuilder\Filter' => __DIR__ . '/../src',
                         __NAMESPACE__ => __DIR__,
                         'Test' => __DIR__ . '/../vendor/Test/',
                     ),
@@ -65,7 +65,9 @@ class Bootstrap
         $previousDir = '.';
         while (!is_dir($dir . '/' . $path)) {
             $dir = dirname($dir);
-            if ($previousDir === $dir) return false;
+            if ($previousDir === $dir) {
+                return false;
+            }
             $previousDir = $dir;
         }
 

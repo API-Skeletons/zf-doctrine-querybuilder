@@ -1,4 +1,8 @@
 <?php
+/**
+ * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
+ * @copyright Copyright (c) 2014 Zend Technologies USA Inc. (http://www.zend.com)
+ */
 
 namespace ZF\Doctrine\QueryBuilder\Filter\Service;
 
@@ -15,7 +19,7 @@ class ORMFilterManager extends AbstractPluginManager
     {
         foreach ($filters as $option) {
             if (!isset($option['type']) or !$option['type']) {
-            // @codeCoverageIgnoreStart
+                // @codeCoverageIgnoreStart
                 throw new Exception\RuntimeException('Array element "type" is required for all filters');
             }
             // @codeCoverageIgnoreEnd

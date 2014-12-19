@@ -7,7 +7,7 @@ return array(
         'DoctrineMongoODMModule',
         'Db',
         'DbMongo',
-        'Zf\Doctrine\QueryBuilder\Filter',
+        'ZF\Doctrine\QueryBuilder\Filter',
     ),
     'module_listener_options' => array(
         'config_glob_paths' => array(
@@ -17,7 +17,7 @@ return array(
             __DIR__ . '/../vendor',
             'DbMongo' => __DIR__ . '/module/DbMongo',
             'Db' => __DIR__ . '/module/Db',
-            'Zf\Doctrine\QueryBuilder\Filter' => __DIR__ . '/../src',
+            'ZF\Doctrine\QueryBuilder\Filter' => __DIR__ . '/../src',
         ),
     ),
 );

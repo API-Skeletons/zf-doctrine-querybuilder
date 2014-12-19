@@ -1,7 +1,7 @@
 <?php
 /**
  * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
- * @copyright Copyright (c) 2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright Copyright (c) 2014 Zend Technologies USA Inc. (http://www.zend.com)
  */
 
 namespace ZF\Doctrine\QueryBuilder\Filter;
@@ -9,15 +9,14 @@ namespace ZF\Doctrine\QueryBuilder\Filter;
 use Zend\ModuleManager\Feature\DependencyIndicatorInterface;
 use Zend\ModuleManager\ModuleManager;
 
-class Module
-    implements DependencyIndicatorInterface
+class Module implements DependencyIndicatorInterface
 {
     public function getAutoloaderConfig()
     {
         return array(
             'Zend\Loader\StandardAutoloader' => array(
                 'namespaces' => array(
-                    __NAMESPACE__ => __DIR__,
+                    __NAMESPACE__ => __DIR__ . '/src/',
                 ),
             ),
         );
@@ -25,13 +24,12 @@ class Module
 
     public function getConfig()
     {
-        return include __DIR__ . '/../config/server.config.php';
+        return include __DIR__ . '/config/server.config.php';
     }
 
     public function init(ModuleManager $moduleManager)
     {
-
-        $serviceManager = $moduleManager->getEvent()->getParam('ServiceManager');
+        $serviceManager  = $moduleManager->getEvent()->getParam('ServiceManager');
         $serviceListener = $serviceManager->get('ServiceListener');
 
         $serviceListener->addServiceManager(
@@ -56,6 +54,6 @@ class Module
      */
     public function getModuleDependencies()
     {
-        return ['DoctrineModule'];
+        return array('DoctrineModule');
     }
 }
