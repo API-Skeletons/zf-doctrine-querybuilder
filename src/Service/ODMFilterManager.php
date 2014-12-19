@@ -27,7 +27,7 @@ class ODMFilterManager extends AbstractPluginManager
             // @codeCoverageIgnoreEnd
 
             try {
-                $filter = $this->get(strtolower($option['type']), [$this]);
+                $filter = $this->get(strtolower($option['type']), array($this));
             } catch (Exception\ServiceNotFoundException $e) {
                 // @codeCoverageIgnoreStart
                 return new ApiProblem(500, $e->getMessage());
