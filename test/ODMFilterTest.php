@@ -17,9 +17,9 @@ class ODMFilterTest extends AbstractHttpControllerTestCase
         $queryBuilder = $objectManager->createQueryBuilder($entity);
         # NOTE:  the metadata is an array with one element in testing :\
 
-        $metadata = $objectManager->getMetadataFactory()->getAllMetadata()[0];
+        $metadata = $objectManager->getMetadataFactory()->getAllMetadata();
 
-        $filterManager->filter($queryBuilder, $metadata, $filters);
+        $filterManager->filter($queryBuilder, $metadata[0], $filters);
 
         $result = $queryBuilder->getQuery()->execute();
         return sizeof($result);
@@ -32,7 +32,8 @@ class ODMFilterTest extends AbstractHttpControllerTestCase
         );
         parent::setUp();
 
-        $config = $this->getApplication()->getConfig()['doctrine']['connection']['odm_default'];
+        $config = $this->getApplication()->getConfig();
+        $config = $config['doctrine']['connection']['odm_default'];
 
         $connection = new \MongoClient('mongodb://' . $config['server'] . ':' . $config['port']);
         $db = $connection->{$config['dbname']};
