@@ -19,7 +19,7 @@ before_script:
 
 script:
   - ./vendor/bin/phpunit
-  - ./vendor/bin/php-cs-fixer -v fix . --dry-run --config-file ./.php_cs
+  - ./vendor/bin/php-cs-fixer -v fix . --dry-run --config-file ./.php_cs --level=psr2
 
 after_script:
 

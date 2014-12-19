@@ -68,7 +68,7 @@ class Artist
             $this->album[] = $album;
         } elseif ($album instanceof ArrayCollection) {
             foreach ($album as $a) {
-                if ( ! $a instanceof \Db\Entity\Album) {
+                if (! $a instanceof \Db\Entity\Album) {
                     throw new \Exception('Invalid type in addAlbum');
                 }
                 $this->album->add($a);
@@ -89,13 +89,11 @@ class Artist
             $this->album[] = $album;
         } elseif ($album instanceof ArrayCollection) {
             foreach ($album as $a) {
-                if ( ! $a instanceof \Db\Entity\Album) {
+                if (! $a instanceof \Db\Entity\Album) {
                     throw new \Exception('Invalid type remove addAlbum');
                 }
                 $this->album->removeElement($a);
             }
         }
-
     }
-
 }

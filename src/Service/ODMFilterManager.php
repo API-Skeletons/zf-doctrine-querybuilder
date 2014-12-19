@@ -21,7 +21,7 @@ class ODMFilterManager extends AbstractPluginManager
     {
         foreach ($filters as $option) {
             if (! isset($option['type']) or ! $option['type']) {
-            // @codeCoverageIgnoreStart
+                // @codeCoverageIgnoreStart
                 return new ApiProblem(500, 'Array element "type" is required for all filters');
             }
             // @codeCoverageIgnoreEnd
@@ -29,7 +29,7 @@ class ODMFilterManager extends AbstractPluginManager
             try {
                 $filter = $this->get(strtolower($option['type']), [$this]);
             } catch (Exception\ServiceNotFoundException $e) {
-            // @codeCoverageIgnoreStart
+                // @codeCoverageIgnoreStart
                 return new ApiProblem(500, $e->getMessage());
             }
 

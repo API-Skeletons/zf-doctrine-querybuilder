@@ -19,7 +19,7 @@ class ORMFilterManager extends AbstractPluginManager
     {
         foreach ($filters as $option) {
             if (!isset($option['type']) or !$option['type']) {
-            // @codeCoverageIgnoreStart
+                // @codeCoverageIgnoreStart
                 throw new Exception\RuntimeException('Array element "type" is required for all filters');
             }
             // @codeCoverageIgnoreEnd
