@@ -2,7 +2,7 @@
 
 namespace Db;
 
-return [
+return array(
     'zf-doctrine-querybuilder-filter-orm' => array(
         'invokables' => array(
             'eq' => 'ZF\Doctrine\QueryBuilder\Filter\ORM\Equals',
@@ -41,19 +41,19 @@ return [
         ),
     ),
 
-    'doctrine' => [
-        'driver' => [
-           'db_driver' => [
+    'doctrine' => array(
+        'driver' => array(
+           'db_driver' => array(
                 'class' => 'Doctrine\ORM\Mapping\Driver\XmlDriver',
-                'paths' => [__DIR__ . '/xml'],
-            ],
-            'orm_default' => [
-                'drivers' => [
+                'paths' => array(__DIR__ . '/xml'),
+            ),
+            'orm_default' => array(
+                'drivers' => array(
                     __NAMESPACE__ . '\Entity' => 'db_driver',
-                ],
-            ],
-        ],
-    ],
+                ),
+            ),
+        ),
+    ),
 
     'view_manager' => array(
         'display_not_found_reason' => true,
@@ -80,4 +80,4 @@ return [
             'ViewJsonStrategy',
         ),
     ),
-];
+);

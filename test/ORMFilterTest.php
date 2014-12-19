@@ -17,9 +17,11 @@ class ORMFilterTest extends AbstractHttpControllerTestCase
 
         $queryBuilder = $objectManager->createQueryBuilder();
         $queryBuilder->select('row')
-           ->from($entity, 'row')
-           ;
-        $filterManager->filter($queryBuilder, $objectManager->getMetadataFactory()->getAllMetadata()[0], $filters);
+            ->from($entity, 'row');
+
+        $metadata = $objectManager->getMetadataFactory()->getAllMetadata();
+
+        $filterManager->filter($queryBuilder, $metadata[0], $filters);
 
         $result = $queryBuilder->getQuery()->getResult();
         return sizeof($result);
