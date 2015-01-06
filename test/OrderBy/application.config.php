@@ -17,7 +17,7 @@ return array(
             __DIR__ . '/../vendor',
             'DbMongo' => __DIR__ . '/module/DbMongo',
             'Db' => __DIR__ . '/module/Db',
-            'ZF\Doctrine\QueryBuilder' => __DIR__ . '/../../',
+            'ZF\Doctrine\QueryBuilder' => __DIR__ . '/../..',
         ),
     ),
 );

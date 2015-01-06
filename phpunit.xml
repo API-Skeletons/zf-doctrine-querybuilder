@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit bootstrap="./test/Bootstrap.php" colors="true">
     <testsuites>
-        <testsuite name="orm">
+        <testsuite name="filter-orm">
             <file>./test/Filter/ORMFilterTest.php</file>
         </testsuite>
-        <testsuite name="odm">
+        <testsuite name="filter-odm">
             <file>./test/Filter/ODMFilterTest.php</file>
+        </testsuite>
+        <testsuite name="orderby-orm">
+            <file>./test/OrderBy/ORMOrderByTest.php</file>
+        </testsuite>
+        <testsuite name="orderby-odm">
+            <file>./test/OrderBy/ODMOrderByTest.php</file>
         </testsuite>
     </testsuites>
 

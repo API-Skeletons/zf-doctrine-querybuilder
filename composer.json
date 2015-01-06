@@ -1,5 +1,5 @@
 {
-    "name": "zfcampus/zf-doctrine-querybuilder-filter",
+    "name": "zfcampus/zf-doctrine-querybuilder",
     "type": "library",
     "description": "QueryBuilder filters for Doctrine",
     "keywords": [
