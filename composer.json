@@ -44,7 +44,7 @@
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
-            "ZF\\Doctrine\\QueryBuilder\\Filter\\": "src/"
+            "ZF\\Doctrine\\QueryBuilder\\": "src/"
         },
         "classmap": [
           "Module.php"
@@ -52,7 +52,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "ZFTest\\Doctrine\\QueryBuilder\\Filter\\": "test/"
+            "ZFTest\\Doctrine\\QueryBuilder\\": "test/"
         }
     },
     "extra": {
