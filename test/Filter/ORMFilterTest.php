@@ -103,8 +103,17 @@ class ORMFilterTest extends AbstractHttpControllerTestCase
             array(
                 'type' => 'orx',
                 'conditions' => array(
-                    array('field' =>'name', 'type'=>'eq', 'value' => 'ArtistOne'),
-                    array('field' =>'name', 'type'=>'eq', 'value' => 'ArtistTwo'),
+                    array(
+                        'field' => 'name',
+                        'type' => 'eq',
+                        'value' => 'ArtistOne'
+                    ),
+
+                    array(
+                        'field' => 'name',
+                        'type' => 'eq',
+                        'value' => 'ArtistTwo'
+                    ),
                 ),
             ),
         );
@@ -115,8 +124,16 @@ class ORMFilterTest extends AbstractHttpControllerTestCase
             array(
                 'type' => 'orx',
                 'conditions' => array(
-                    array('field' =>'name', 'type'=>'eq', 'value' => 'ArtistOne'),
-                    array('field' =>'name', 'type'=>'eq', 'value' => 'ArtistTwo'),
+                    array(
+                        'field' => 'name',
+                        'type' => 'eq',
+                        'value' => 'ArtistOne'
+                    ),
+                    array(
+                        'field' => 'name',
+                        'type' => 'eq',
+                        'value' => 'ArtistTwo'
+                    ),
                 ),
             ),
             array(
@@ -135,8 +152,16 @@ class ORMFilterTest extends AbstractHttpControllerTestCase
             array(
                 'type' => 'andx',
                 'conditions' => array(
-                    array('field' =>'name', 'type'=>'eq', 'value' => 'ArtistOne'),
-                    array('field' =>'name', 'type'=>'eq', 'value' => 'ArtistTwo'),
+                    array(
+                        'field' => 'name',
+                        'type' => 'eq',
+                        'value' => 'ArtistOne'
+                    ),
+                    array(
+                        'field' => 'name',
+                        'type' => 'eq',
+                        'value' => 'ArtistTwo'
+                    ),
                 ),
             ),
         );
@@ -148,8 +173,17 @@ class ORMFilterTest extends AbstractHttpControllerTestCase
             array(
                 'type' => 'andx',
                 'conditions' => array(
-                    array('field' =>'createdAt', 'type'=>'eq', 'value' => '2014-12-18 13:17:17'),
-                    array('field' =>'name', 'type'=>'eq', 'value' => 'ArtistTwo'),
+                    array(
+                        'field' => 'createdAt',
+                        'type' => 'eq',
+                        'value' => '2014-12-18 13:17:17'
+                    ),
+
+                    array(
+                        'field' => 'name',
+                        'type' => 'eq',
+                        'value' => 'ArtistTwo'
+                    ),
                 ),
             ),
             array(
@@ -166,22 +200,45 @@ class ORMFilterTest extends AbstractHttpControllerTestCase
     public function testEquals()
     {
         $filters = array(
-            array('field' =>'name', 'type'=>'eq', 'value' => 'ArtistOne'),
+            array(
+                'field' => 'name',
+                'type' => 'eq',
+                'value' => 'ArtistOne'
+            ),
         );
 
         $this->assertEquals(1, $this->countResult($filters));
 
 
         $filters = array(
-            array('field' =>'createdAt', 'where' => 'and', 'type'=>'eq', 'value' => '2014-12-18 13:17:17', 'format' => 'Y-m-d H:i:s'),
+            array(
+                'field' => 'createdAt',
+                'where' => 'and',
+                'type' => 'eq',
+                'value' => '2014-12-18 13:17:17',
+                'format' => 'Y-m-d H:i:s'
+            ),
         );
 
         $this->assertEquals(1, $this->countResult($filters));
 
 
         $filters = array(
-            array('field' =>'createdAt', 'where' => 'or', 'type'=>'eq', 'value' => '2014-12-18 13:17:17', 'format' => 'Y-m-d H:i:s'),
-            array('field' =>'createdAt', 'where' => 'or', 'type'=>'eq', 'value' => '2012-12-18 13:17:17', 'format' => 'Y-m-d H:i:s'),
+            array(
+                'field' => 'createdAt',
+                'where' => 'or',
+                'type' => 'eq',
+                'value' => '2014-12-18 13:17:17',
+                'format' => 'Y-m-d H:i:s'
+            ),
+
+            array(
+                'field' => 'createdAt',
+                'where' => 'or',
+                'type' => 'eq',
+                'value' => '2012-12-18 13:17:17',
+                'format' => 'Y-m-d H:i:s'
+            ),
         );
 
         $this->assertEquals(2, $this->countResult($filters));
@@ -190,22 +247,45 @@ class ORMFilterTest extends AbstractHttpControllerTestCase
     public function testNotEquals()
     {
         $filters = array(
-            array('field' =>'name', 'type'=>'neq', 'value' => 'ArtistOne'),
+            array(
+                'field' => 'name',
+                'type' => 'neq',
+                'value' => 'ArtistOne'
+            ),
         );
 
         $this->assertEquals(4, $this->countResult($filters));
 
 
         $filters = array(
-            array('field' =>'createdAt', 'where' => 'or', 'type'=>'neq', 'value' => '2014-12-18 13:17:17', 'format' => 'Y-m-d H:i:s'),
+            array(
+                'field' => 'createdAt',
+                'where' => 'or',
+                'type' => 'neq',
+                'value' => '2014-12-18 13:17:17',
+                'format' => 'Y-m-d H:i:s'
+            ),
         );
 
         $this->assertEquals(3, $this->countResult($filters));
 
 
         $filters = array(
-            array('field' =>'createdAt', 'where' => 'and', 'type'=>'neq', 'value' => '2014-12-18 13:17:17', 'format' => 'Y-m-d H:i:s'),
-            array('field' =>'createdAt', 'where' => 'and', 'type'=>'neq', 'value' => '2012-12-18 13:17:17', 'format' => 'Y-m-d H:i:s'),
+            array(
+                'field' => 'createdAt',
+                'where' => 'and',
+                'type' => 'neq',
+                'value' => '2014-12-18 13:17:17',
+                'format' => 'Y-m-d H:i:s'
+            ),
+
+            array(
+                'field' => 'createdAt',
+                'where' => 'and',
+                'type' => 'neq',
+                'value' => '2012-12-18 13:17:17',
+                'format' => 'Y-m-d H:i:s'
+            ),
         );
 
         $this->assertEquals(2, $this->countResult($filters));
@@ -214,22 +294,43 @@ class ORMFilterTest extends AbstractHttpControllerTestCase
     public function testLessThan()
     {
         $filters = array(
-            array('field' =>'createdAt', 'type'=>'lt', 'value' => '2014-01-01', 'format' => 'Y-m-d'),
+            array(
+                'field' => 'createdAt',
+                'type' => 'lt',
+                'value' => '2014-01-01',
+                'format' => 'Y-m-d'
+            ),
         );
 
         $this->assertEquals(3, $this->countResult($filters));
 
 
         $filters = array(
-            array('field' =>'createdAt', 'where' => 'and', 'type'=>'lt', 'value' => '2013-12-18 13:17:17'),
+            array(
+                'field' => 'createdAt',
+                'where' => 'and',
+                'type' => 'lt',
+                'value' => '2013-12-18 13:17:17',
+            ),
         );
 
         $this->assertEquals(2, $this->countResult($filters));
 
 
         $filters = array(
-            array('field' =>'createdAt', 'where' => 'or', 'type'=>'lt', 'value' => '2013-12-18 13:17:17'),
-            array('field' =>'name', 'where' => 'or', 'type' => 'eq', 'value'=>'ArtistTwo'),
+            array(
+                'field' => 'createdAt',
+                'where' => 'or',
+                'type' => 'lt',
+                'value' => '2013-12-18 13:17:17'
+            ),
+
+            array(
+                'field' => 'name',
+                'where' => 'or',
+                'type' => 'eq',
+                'value' => 'ArtistTwo'
+            ),
         );
 
         $this->assertEquals(3, $this->countResult($filters));
@@ -238,29 +339,54 @@ class ORMFilterTest extends AbstractHttpControllerTestCase
     public function testLessThanOrEquals()
     {
         $filters = array(
-            array('field' =>'createdAt', 'type'=>'lte', 'value' => '2011-12-20', 'format' => 'Y-m-d'),
+            array(
+                'field' => 'createdAt',
+                'type' => 'lte',
+                'value' => '2011-12-20',
+                'format' => 'Y-m-d',
+            ),
         );
 
         $this->assertEquals(1, $this->countResult($filters));
 
 
         $filters = array(
-            array('field' =>'createdAt', 'type'=>'lte', 'value' => '2011-12-18 13:17:16'),
+            array(
+                'field' => 'createdAt',
+                'type' => 'lte',
+                'value' => '2011-12-18 13:17:16',
+            ),
         );
 
         $this->assertEquals(0, $this->countResult($filters));
 
 
         $filters = array(
-            array('field' =>'createdAt', 'where' => 'and', 'type'=>'lte', 'value' => '2013-12-18 13:17:17'),
+            array(
+                'field' => 'createdAt',
+                'where' => 'and',
+                'type' => 'lte',
+                'value' => '2013-12-18 13:17:17',
+            ),
         );
 
         $this->assertEquals(3, $this->countResult($filters));
 
 
         $filters = array(
-            array('field' =>'createdAt', 'where' => 'or', 'type'=>'lte', 'value' => '2013-12-18 13:17:17'),
-            array('field' =>'name', 'where' => 'or', 'type' => 'eq', 'value'=>'ArtistTwo'),
+            array(
+                'field' => 'createdAt',
+                'where' => 'or',
+                'type' => 'lte',
+                'value' => '2013-12-18 13:17:17'
+            ),
+
+            array(
+                'field' => 'name',
+                'where' => 'or',
+                'type' => 'eq',
+                'value' => 'ArtistTwo'
+            ),
         );
 
         $this->assertEquals(4, $this->countResult($filters));
@@ -269,21 +395,45 @@ class ORMFilterTest extends AbstractHttpControllerTestCase
     public function testGreaterThan()
     {
         $filters = array(
-            array('field' =>'createdAt', 'type'=>'gt', 'value' => '2014-01-01', 'format' => 'Y-m-d'),
+            array(
+                'field' => 'createdAt',
+                'type' => 'gt',
+                'value' => '2014-01-01',
+                'format' => 'Y-m-d'
+            ),
         );
 
         $this->assertEquals(1, $this->countResult($filters));
 
 
         $filters = array(
-            array('field' =>'createdAt', 'where' => 'or', 'type'=>'gt', 'value' => '2013-12-18 13:17:17', 'format' => 'Y-m-d H:i:s'),
+            array(
+                'field' => 'createdAt',
+                'where' => 'or',
+                'type' => 'gt',
+                'value' => '2013-12-18 13:17:17',
+                'format' => 'Y-m-d H:i:s',
+            ),
         );
 
         $this->assertEquals(1, $this->countResult($filters));
 
         $filters = array(
-            array('field' =>'createdAt', 'where' => 'and', 'type'=>'gt', 'value' => '2013-12-18 13:17:17', 'format' => 'Y-m-d H:i:s'),
-            array('field' =>'createdAt', 'where' => 'and', 'type'=>'gt', 'value' => '2012-12-18 13:17:17', 'format' => 'Y-m-d H:i:s'),
+            array(
+                'field' => 'createdAt',
+                'where' => 'and',
+                'type' => 'gt',
+                'value' => '2013-12-18 13:17:17',
+                'format' => 'Y-m-d H:i:s'
+            ),
+
+            array(
+                'field' => 'createdAt',
+                'where' => 'and',
+                'type' => 'gt',
+                'value' => '2012-12-18 13:17:17',
+                'format' => 'Y-m-d H:i:s',
+            ),
         );
 
         $this->assertEquals(1, $this->countResult($filters));
@@ -292,29 +442,56 @@ class ORMFilterTest extends AbstractHttpControllerTestCase
     public function testGreaterThanOrEquals()
     {
         $filters = array(
-            array('field' =>'createdAt', 'type'=>'gte', 'value' => '2014-12-18 13:17:17'),
+            array(
+                'field' => 'createdAt',
+                'type' => 'gte',
+                'value' => '2014-12-18 13:17:17',
+            ),
         );
 
         $this->assertEquals(1, $this->countResult($filters));
 
 
         $filters = array(
-                    array('field' =>'createdAt', 'type'=>'gte', 'value' => '2014-12-18 13:17:18'),
+            array(
+                'field' => 'createdAt',
+                'type' => 'gte',
+                'value' => '2014-12-18 13:17:18',
+            ),
         );
 
         $this->assertEquals(0, $this->countResult($filters));
 
 
         $filters = array(
-                    array('field' =>'createdAt', 'where' => 'and', 'type'=>'gte', 'value' => '2013-12-18 13:17:17', 'format' => 'Y-m-d H:i:s'),
+            array(
+                'field' => 'createdAt',
+                'where' => 'and',
+                'type' => 'gte',
+                'value' => '2013-12-18 13:17:17',
+                'format' => 'Y-m-d H:i:s',
+            ),
         );
 
         $this->assertEquals(2, $this->countResult($filters));
 
 
         $filters = array(
-            array('field' =>'createdAt', 'where' => 'or', 'type'=>'gte', 'value' => '2013-12-18 13:17:17', 'format' => 'Y-m-d H:i:s'),
-            array('field' =>'createdAt', 'where' => 'or', 'type'=>'gte', 'value' => '2012-12-18 13:17:17', 'format' => 'Y-m-d H:i:s'),
+            array(
+                'field' => 'createdAt',
+                'where' => 'or',
+                'type' => 'gte',
+                'value' => '2013-12-18 13:17:17',
+                'format' => 'Y-m-d H:i:s'
+            ),
+
+            array(
+                'field' => 'createdAt',
+                'where' => 'or',
+                'type' => 'gte',
+                'value' => '2012-12-18 13:17:17',
+                'format' => 'Y-m-d H:i:s'
+            ),
         );
 
         $this->assertEquals(3, $this->countResult($filters));
@@ -326,22 +503,39 @@ class ORMFilterTest extends AbstractHttpControllerTestCase
         $objectManager = $serviceManager->get('doctrine.entitymanager.orm_default');
 
         $filters = array(
-            array('field' =>'createdAt', 'type'=>'isnull'),
+            array(
+                'field' => 'createdAt',
+                'type' => 'isnull',
+            ),
         );
 
         $this->assertEquals(1, $this->countResult($filters));
 
 
         $filters = array(
-            array('field' =>'createdAt', 'where' => 'and', 'type'=>'isnull'),
+            array(
+                'field' => 'createdAt',
+                'where' => 'and',
+                'type' => 'isnull',
+            ),
         );
 
         $this->assertEquals(1, $this->countResult($filters));
 
 
         $filters = array(
-            array('field' =>'createdAt', 'where' => 'or', 'type' => 'isnull'),
-            array('field' =>'name', 'where' => 'or', 'type' => 'eq', 'value'=>'ArtistOne'),
+            array(
+                'field' =>'createdAt',
+                'where' => 'or',
+                'type' => 'isnull',
+            ),
+
+            array(
+                'field' =>'name',
+                'where' => 'or',
+                'type' => 'eq',
+                'value' => 'ArtistOne',
+            ),
         );
 
         $this->assertEquals(2, $this->countResult($filters));
@@ -350,22 +544,39 @@ class ORMFilterTest extends AbstractHttpControllerTestCase
     public function testIsNotNull()
     {
         $filters = array(
-            array('field' =>'createdAt', 'type'=>'isnotnull'),
+            array(
+                'field' => 'createdAt',
+                'type'=> 'isnotnull',
+            ),
         );
 
         $this->assertEquals(4, $this->countResult($filters));
 
 
         $filters = array(
-            array('field' =>'createdAt', 'where' => 'and', 'type'=>'isnotnull'),
+            array(
+                'field' => 'createdAt',
+                'where' => 'and',
+                'type' => 'isnotnull',
+            ),
         );
 
         $this->assertEquals(4, $this->countResult($filters));
 
 
         $filters = array(
-            array('field' =>'createdAt', 'where' => 'or', 'type' => 'isnotnull'),
-            array('field' =>'name', 'where' => 'or', 'type' => 'eq', 'value'=>'ArtistFive'),
+            array(
+                'field' => 'createdAt',
+                'where' => 'or',
+                'type' => 'isnotnull',
+            ),
+
+            array(
+                'field' => 'name',
+                'where' => 'or',
+                'type' => 'eq',
+                'value' => 'ArtistFive',
+            ),
         );
 
         $this->assertEquals(5, $this->countResult($filters));
@@ -374,20 +585,38 @@ class ORMFilterTest extends AbstractHttpControllerTestCase
     public function testIn()
     {
         $filters = array(
-            array('field' =>'name', 'type'=>'in', 'values' => array('ArtistOne', 'ArtistTwo')),
+            array(
+                'field' => 'name',
+                'type' => 'in',
+                'values' => array(
+                    'ArtistOne',
+                    'ArtistTwo',
+                )
+            ),
         );
 
         $this->assertEquals(2, $this->countResult($filters));
 
         $filters = array(
-            array('field' =>'createdAt', 'where' => 'and', 'type'=>'in', 'values' => array('2011-12-18 13:17:17')),
+            array(
+                'field' => 'createdAt',
+                'where' => 'and',
+                'type' => 'in',
+                'values' => array('2011-12-18 13:17:17')
+            ),
         );
 
         $this->assertEquals(1, $this->countResult($filters));
 
 
         $filters = array(
-                    array('field' =>'createdAt', 'where' => 'or', 'type'=>'in', 'values' => array('2011-12-18 13:17:17'), 'format' => 'Y-m-d H:i:s'),
+            array(
+                'field' => 'createdAt',
+                'where' => 'or',
+                'type' => 'in',
+                'values' => array('2011-12-18 13:17:17'),
+                'format' => 'Y-m-d H:i:s'
+             ),
         );
 
         $this->assertEquals(1, $this->countResult($filters));
@@ -396,21 +625,41 @@ class ORMFilterTest extends AbstractHttpControllerTestCase
     public function testNotIn()
     {
         $filters = array(
-            array('field' =>'name', 'type'=>'notin', 'values' => array('ArtistOne', 'ArtistTwo')),
+            array(
+                'field' => 'name',
+                'type' => 'notin',
+                'values' => array('ArtistOne', 'ArtistTwo')
+            ),
         );
 
         $this->assertEquals(3, $this->countResult($filters));
 
 
         $filters = array(
-            array('field' =>'createdAt', 'where' => 'and', 'type'=>'notin', 'values' => array('2011-12-18 13:17:17', 'format' => 'Y-m-d H:i:s')),
+            array(
+                'field' => 'createdAt',
+                'where' => 'and',
+                'type' => 'notin',
+                'values' => array(
+                    '2011-12-18 13:17:17',
+                    'format' => 'Y-m-d H:i:s'
+                )
+            ),
         );
 
         $this->assertEquals(3, $this->countResult($filters));
 
 
         $filters = array(
-            array('field' =>'createdAt', 'where' => 'or', 'type'=>'notin', 'values' => array('2011-12-18 13:17:17'), 'format' => 'Y-m-d H:i:s'),
+            array(
+                'field' => 'createdAt',
+                'where' => 'or',
+                'type' => 'notin',
+                'values' => array(
+                    '2011-12-18 13:17:17',
+                ),
+                'format' => 'Y-m-d H:i:s',
+            ),
         );
 
         $this->assertEquals(3, $this->countResult($filters));
@@ -419,21 +668,41 @@ class ORMFilterTest extends AbstractHttpControllerTestCase
     public function testBetween()
     {
         $filters = array(
-            array('field' =>'createdAt', 'where' => 'and', 'type'=>'between', 'from' => '2012-12-15', 'to' => '2013-01-01', 'format' => 'Y-m-d'),
+            array(
+                'field' => 'createdAt',
+                'where' => 'and',
+                'type' => 'between',
+                'from' => '2012-12-15',
+                'to' => '2013-01-01',
+                'format' => 'Y-m-d',
+            ),
         );
 
         $this->assertEquals(1, $this->countResult($filters));
 
 
         $filters = array(
-            array('field' =>'createdAt', 'where' => 'or', 'type'=>'between', 'from' => '2010-12-15', 'to' => '2013-01-01', 'format' => 'Y-m-d'),
+            array(
+                'field' => 'createdAt',
+                'where' => 'or',
+                'type' => 'between',
+                'from' => '2010-12-15',
+                'to' => '2013-01-01',
+                'format' => 'Y-m-d',
+            ),
         );
 
         $this->assertEquals(2, $this->countResult($filters));
 
 
         $filters = array(
-            array('field' =>'createdAt', 'type'=>'between', 'from' => '2010-12-15', 'to' => '2013-01-01', 'format' => 'Y-m-d'),
+            array(
+                'field' => 'createdAt',
+                'type' => 'between',
+                'from' => '2010-12-15',
+                'to' => '2013-01-01',
+                'format' => 'Y-m-d',
+            ),
         );
 
         $this->assertEquals(2, $this->countResult($filters));
@@ -442,29 +711,53 @@ class ORMFilterTest extends AbstractHttpControllerTestCase
     public function testLike()
     {
         $filters = array(
-            array('field' =>'name', 'type'=>'like', 'value' => 'Artist%'),
+            array(
+                'field' => 'name',
+                'type' => 'like',
+                'value' => 'Artist%',
+            ),
         );
 
         $this->assertEquals(5, $this->countResult($filters));
 
 
         $filters = array(
-            array('field' =>'name', 'type'=>'like', 'value' => '%Two'),
+            array(
+                'field' => 'name',
+                'type' => 'like',
+                'value' => '%Two',
+            ),
         );
 
         $this->assertEquals(1, $this->countResult($filters));
 
 
         $filters = array(
-            array('field' =>'name', 'where' => 'and', 'type'=>'like', 'value' => '%Art%'),
+            array(
+                'field' => 'name',
+                'where' => 'and',
+                'type' => 'like',
+                'value' => '%Art%',
+            ),
         );
 
         $this->assertEquals(5, $this->countResult($filters));
 
 
         $filters = array(
-            array('field' =>'name', 'where' => 'or', 'type' => 'like', 'value' => 'ArtistT%'),
-            array('field' =>'name', 'where' => 'or', 'type' => 'like', 'value'=>'ArtistF%'),
+            array(
+                'field' => 'name',
+                'where' => 'or',
+                'type' => 'like',
+                'value' => 'ArtistT%',
+            ),
+
+            array(
+                'field' => 'name',
+                'where' => 'or',
+                'type' => 'like',
+                'value' => 'ArtistF%',
+            ),
         );
 
         $this->assertEquals(4, $this->countResult($filters));
@@ -473,22 +766,42 @@ class ORMFilterTest extends AbstractHttpControllerTestCase
     public function testNotLike()
     {
         $filters = array(
-            array('field' =>'name', 'type'=>'notlike', 'value' => '%Two'),
+            array(
+                'field' => 'name',
+                'type' => 'notlike',
+                'value' => '%Two',
+            ),
         );
 
         $this->assertEquals(4, $this->countResult($filters));
 
 
         $filters = array(
-            array('field' =>'name', 'where' => 'and', 'type'=>'notlike', 'value' => '%Art%'),
+            array(
+                'field' => 'name',
+                'where' => 'and',
+                'type' => 'notlike',
+                'value' => '%Art%',
+            ),
         );
 
         $this->assertEquals(0, $this->countResult($filters));
 
 
         $filters = array(
-            array('field' =>'name', 'where' => 'and', 'type' => 'notlike', 'value' => 'ArtistT%'),
-            array('field' =>'name', 'where' => 'and', 'type' => 'notlike', 'value'=>'ArtistF%'),
+            array(
+                'field' => 'name',
+                'where' => 'and',
+                'type' => 'notlike',
+                'value' => 'ArtistT%',
+            ),
+
+            array(
+                'field' => 'name',
+                'where' => 'and',
+                'type' => 'notlike',
+                'value' => 'ArtistF%',
+            ),
         );
 
         $this->assertEquals(1, $this->countResult($filters));
@@ -497,16 +810,36 @@ class ORMFilterTest extends AbstractHttpControllerTestCase
     public function testInnerJoin()
     {
         $filters = array(
-            array('type' => 'innerjoin', 'alias' => 'a', 'field' => 'artist'),
-            array('alias' => 'a', 'field' => 'name', 'type' => 'eq', 'value' => 'ArtistOne'),
+            array(
+                'type' => 'innerjoin',
+                'alias' => 'a',
+                'field' => 'artist',
+            ),
+
+            array(
+                'alias' => 'a',
+                'field' => 'name',
+                'type' => 'eq',
+                'value' => 'ArtistOne',
+            ),
         );
 
         $this->assertEquals(3, $this->countResult($filters, 'Db\Entity\Album'));
 
 
         $filters = array(
-            array('type' => 'innerjoin', 'parentAlias' => 'row', 'alias' => 'a', 'field' => 'artist'),
-            array('alias' => 'a', 'field' => 'name', 'type' => 'eq', 'value' => 'ArtistTwo'),
+            array(
+                'type' => 'innerjoin',
+                'parentAlias' => 'row',
+                'alias' => 'a',
+                'field' => 'artist',
+            ),
+            array(
+                'alias' => 'a',
+                'field' => 'name',
+                'type' => 'eq',
+                'value' => 'ArtistTwo',
+            ),
         );
 
         $this->assertEquals(2, $this->countResult($filters, 'Db\Entity\Album'));

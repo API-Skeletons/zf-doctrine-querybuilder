@@ -33,4 +33,3 @@ abstract class AbstractOrderBy implements OrderByInterface
         return $this->orderByManager;
     }
 }
-

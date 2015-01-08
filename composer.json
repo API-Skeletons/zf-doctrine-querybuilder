@@ -25,12 +25,12 @@
         "zendframework/zend-modulemanager": "~2.3",
         "zendframework/zend-mvc": "~2.3",
         "zendframework/zend-servicemanager": "~2.3",
-        "zfcampus/zf-api-problem": "~1.0"
+        "zfcampus/zf-api-problem": "~1.0",
+        "squizlabs/php_codesniffer": "~2.0"
     },
     "require-dev": {
         "doctrine/doctrine-mongo-odm-module": "0.*@dev",
         "doctrine/doctrine-orm-module": "0.*@dev",
-        "fabpot/php-cs-fixer": "~1.0",
         "phpunit/phpunit": "~4.1",
         "zendframework/zend-test": "~2.3",
         "zfcampus/zf-apigility-provider": "~1.0"
