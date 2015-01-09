@@ -19,7 +19,7 @@ before_script:
 
 script:
   - ./vendor/bin/phpunit
-  - ./vendor/bin/phpcs --standard=PSR2 --ignore=test/Bootstrap.php --ignore=test/Filter/data --ignore=test/OrderBy/data --ignore=test/Filter/module --ignore=test/OrderBy/module src test
+  - ./vendor/bin/phpcs --standard=PSR2 --ignore=test/Bootstrap.php --ignore=test/Filter/data --ignore=test/OrderBy/data --ignore=test/Filter/module --ignore=test/OrderBy/module --ignore=test/code-coverage src test
 
 services: 
   - mongodb
