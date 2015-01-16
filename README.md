@@ -41,10 +41,25 @@ Configuring the Module
 Copy `config/zf-doctrine-querybuilder.global.php.dist` to `config/autoload/zf-doctrine-querybuilder.global.php` and edit the list of invokables for orm and odm to those you want enabled by default.
 
 
+Use With Apigility Doctrine
+---------------------------
+
+To enable all filters you may override the default query providers in zf-apigility-doctrine.  Add this to your ```zf-doctrine-querybuilder.global.php``` config file and filters and order-by will be applied if the are in ```$_GET['filter']``` or ```$_GET['order-by']``` request.
+
+```
+'zf-apigility-doctrine-query-provider' => array(
+    'invokables' => array(
+        'default-orm' => 'ZF\Doctrine\QueryBuilder\Query\Provider\DefaultOrm',
+        'default-odm' => 'ZF\Doctrine\QueryBuilder\Query\Provider\DefaultOdm',
+    )
+),
+```
+
+Or: to use with apigility doctrine events see [docs/apigility.example.php](https://github.com/zfcampus/zf-doctrine-querybuilder/blob/master/docs/apigility.example.php)
+
+
 Use
 ---
-
-See also [docs/apigility.example.php](https://github.com/zfcampus/zf-doctrine-querybuilder/blob/master/docs/apigility.example.php)
 
 Configuration example
 ```php
