@@ -3,7 +3,7 @@ ZF Campus Doctrine QueryBuilder
 
 [![Build status](https://api.travis-ci.org/zfcampus/zf-doctrine-querybuilder.svg)](http://travis-ci.org/zfcampus/zf-doctrine-querybuilder)
 
-This library provides query builder directives from array parameters.  This library was designed to apply filters from an HTTP request to give an API fluent filter and orderby dialects.
+This library provides query builder directives from array parameters.  This library was designed to apply filters from an HTTP request to give an API fluent filter and order-by dialects.
 
 
 Philosophy
@@ -49,8 +49,8 @@ To enable all filters you may override the default query providers in zf-apigili
 ```
 'zf-apigility-doctrine-query-provider' => array(
     'invokables' => array(
-        'default-orm' => 'ZF\Doctrine\QueryBuilder\Query\Provider\DefaultOrm',
-        'default-odm' => 'ZF\Doctrine\QueryBuilder\Query\Provider\DefaultOdm',
+        'default_orm' => 'ZF\Doctrine\QueryBuilder\Query\Provider\DefaultOrm',
+        'default_odm' => 'ZF\Doctrine\QueryBuilder\Query\Provider\DefaultOdm',
     )
 ),
 ```
@@ -110,7 +110,7 @@ $queryBuilder->select('row')
 
 $metadata = $objectManager->getMetadataFactory()->getAllMetadata();
 $filterManager->filter($queryBuilder, $metadata[0], $_GET['filters']);
-$orderByManager->orderBy($queryBuilder, $metadata[0], $_GET['orderBy']);
+$orderByManager->orderBy($queryBuilder, $metadata[0], $_GET['orderby']);
 
 $result = $queryBuilder->getQuery()->getResult();
 ```
