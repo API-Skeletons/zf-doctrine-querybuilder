@@ -85,7 +85,7 @@ class DefaultOdm implements QueryProviderInterface, ServiceLocatorAwareInterface
             );
         }
 
-        if(isset($request['order-by'])) {
+        if (isset($request['order-by'])) {
             $metadata = $this->getObjectManager()->getMetadataFactory()->getAllMetadata();
             $orderByManager = $this->getServiceLocator()->get('ZfDoctrineQueryBuilderOrderByManagerOrm');
             $orderByManager->orderBy(
