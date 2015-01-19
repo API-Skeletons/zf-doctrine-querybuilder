@@ -4,7 +4,7 @@
  * @copyright Copyright (c) 2014 Zend Technologies USA Inc. (http://www.zend.com)
  */
 
-namespace ZF\Doctrine\QueryBuilder\Filter;
+namespace ZF\Doctrine\QueryBuilder;
 
 use Zend\ModuleManager\Feature\DependencyIndicatorInterface;
 use Zend\ModuleManager\ModuleManager;
@@ -44,6 +44,19 @@ class Module implements DependencyIndicatorInterface
             'zf-doctrine-querybuilder-filter-odm',
             'ZF\Doctrine\QueryBuilder\Filter\FilterInterface',
             'getDoctrineQueryBuilderFilterOdmConfig'
+        );
+
+        $serviceListener->addServiceManager(
+            'ZfDoctrineQueryBuilderOrderByManagerOrm',
+            'zf-doctrine-querybuilder-orderby-orm',
+            'ZF\Doctrine\QueryBuilder\OrderBy\OrderByInterface',
+            'getDoctrineQueryBuilderOrderByOrmConfig'
+        );
+        $serviceListener->addServiceManager(
+            'ZfDoctrineQueryBuilderOrderByManagerOdm',
+            'zf-doctrine-querybuilder-orderby-odm',
+            'ZF\Doctrine\QueryBuilder\OrderBy\OrderByInterface',
+            'getDoctrineQueryBuilderOrderByOdmConfig'
         );
     }
 
