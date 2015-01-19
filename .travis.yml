@@ -19,13 +19,7 @@ before_script:
 
 script:
   - ./vendor/bin/phpunit
-  - ./vendor/bin/php-cs-fixer -v fix . --dry-run --config-file ./.php_cs --level=psr2
-
-after_script:
+  - ./vendor/bin/phpcs --standard=PSR2 --ignore=test/Bootstrap.php --ignore=test/Filter/data --ignore=test/OrderBy/data --ignore=test/Filter/module --ignore=test/OrderBy/module --ignore=test/code-coverage src test
 
 services: 
   - mongodb
-
-notifications:
-  irc: "irc.freenode.org#apigility-dev"
-  email: false
