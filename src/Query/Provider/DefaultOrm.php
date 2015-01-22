@@ -10,6 +10,7 @@ use Zend\Paginator\Adapter\AdapterInterface;
 use Zend\ServiceManager\AbstractPluginManager;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManger\ServiceLocatorInterface;
+use ZF\Rest\ResourceEvent;
 
 /**
  * Class FetchAllOrm
@@ -77,7 +78,7 @@ class DefaultOrm implements ObjectManagerAwareInterface, QueryProviderInterface,
      *
      * @return mixed This will return an ORM or ODM Query\Builder
      */
-    public function createQuery($event, $entityClass, $parameters)
+    public function createQuery(ResourceEvent $event, $entityClass, $parameters)
     {
         $request = $this->getServiceManager()->get('Application')->getRequest()->getQuery()->toArray();
 
