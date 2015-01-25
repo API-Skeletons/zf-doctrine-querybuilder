@@ -80,7 +80,7 @@ class DefaultOrm implements ObjectManagerAwareInterface, QueryProviderInterface,
      */
     public function createQuery(ResourceEvent $event, $entityClass, $parameters)
     {
-        $request = $this->getServiceManager()->get('Application')->getRequest()->getQuery()->toArray();
+        $request = $this->getServiceLocator()->get('Application')->getRequest()->getQuery()->toArray();
 
         $queryBuilder = $this->getObjectManager()->createQueryBuilder();
         $queryBuilder->select('row')
