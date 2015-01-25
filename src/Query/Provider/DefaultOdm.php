@@ -8,7 +8,7 @@ use DoctrineModule\Persistence\ObjectManagerAwareInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Zend\ServiceManager\AbstractPluginManager;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManger\ServiceLocatorInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
 use ZF\Rest\ResourceEvent;
 
 class DefaultOdm implements QueryProviderInterface, ServiceLocatorAwareInterface
