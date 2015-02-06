@@ -8,7 +8,7 @@ use DoctrineModule\Persistence\ObjectManagerAwareInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Zend\ServiceManager\AbstractPluginManager;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
-use Zend\ServiceManger\ServiceLocatorInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
 use ZF\Rest\ResourceEvent;
 
 class DefaultOdm implements QueryProviderInterface, ServiceLocatorAwareInterface
@@ -71,7 +71,7 @@ class DefaultOdm implements QueryProviderInterface, ServiceLocatorAwareInterface
      */
     public function createQuery(ResourceEvent $event, $entityClass, $parameters)
     {
-        $request = $this->getServiceManager()->get('Application')->getRequest()->getQuery()->toArray();
+        $request = $this->getServiceLocator()->get('Application')->getRequest()->getQuery()->toArray();
 
         $queryBuilder = $this->getObjectManager()->createQueryBuilder();
         $queryBuilder->find($entityClass);
