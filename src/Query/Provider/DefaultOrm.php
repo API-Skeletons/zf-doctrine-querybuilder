@@ -79,15 +79,18 @@ class DefaultOrm implements ObjectManagerAwareInterface, QueryProviderInterface,
      */
     public function createQuery(ResourceEvent $event, $entityClass, $parameters)
     {
-        $request = $this->getServiceLocator()->getServiceLocator()->get('ControllerPluginManager')->get('params')->fromQuery();
+        $request = $this->getServiceLocator()->getServiceLocator()
+            ->get('ControllerPluginManager')->get('params')->fromQuery();
 
         $queryBuilder = $this->getObjectManager()->createQueryBuilder();
         $queryBuilder->select('row')
             ->from($entityClass, 'row');
 
         if (isset($request['filter'])) {
-            $metadata = $this->getObjectManager()->getMetadataFactory()->getAllMetadata();
-            $filterManager = $this->getServiceLocator()->getServiceLocator()->get('ZfDoctrineQueryBuilderFilterManagerOrm');
+            $metadata = $this->getObjectManager()->getMetadataFactory()
+                ->getAllMetadata();
+            $filterManager = $this->getServiceLocator()->getServiceLocator()
+                ->get('ZfDoctrineQueryBuilderFilterManagerOrm');
             $filterManager->filter(
                 $queryBuilder,
                 $metadata[0],
@@ -96,8 +99,10 @@ class DefaultOrm implements ObjectManagerAwareInterface, QueryProviderInterface,
         }
 
         if (isset($request['order-by'])) {
-            $metadata = $this->getObjectManager()->getMetadataFactory()->getAllMetadata();
-            $orderByManager = $this->getServiceLocator()->getServiceLocator()->get('ZfDoctrineQueryBuilderOrderByManagerOrm');
+            $metadata = $this->getObjectManager()->getMetadataFactory()
+                ->getAllMetadata();
+            $orderByManager = $this->getServiceLocator()->getServiceLocator()
+                ->get('ZfDoctrineQueryBuilderOrderByManagerOrm');
             $orderByManager->orderBy(
                 $queryBuilder,
                 $metadata[0],
