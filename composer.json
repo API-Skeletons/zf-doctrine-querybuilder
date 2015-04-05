@@ -32,7 +32,7 @@
         "doctrine/doctrine-mongo-odm-module": "0.*@dev",
         "doctrine/doctrine-orm-module": "0.*@dev",
         "phpunit/phpunit": "~4.1",
-        "zendframework/zend-test": "~2.3",
+        "zendframework/zendframework": "~2.4",
         "zfcampus/zf-apigility-provider": "~1.0"
     },
     "suggest": {
