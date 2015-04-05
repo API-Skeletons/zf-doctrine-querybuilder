@@ -7,7 +7,6 @@ use ZF\Apigility\Doctrine\Server\Paginator\Adapter\DoctrineOrmAdapter;
 use DoctrineModule\Persistence\ObjectManagerAwareInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Zend\Paginator\Adapter\AdapterInterface;
-use Zend\ServiceManager\AbstractPluginManager;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use ZF\Rest\ResourceEvent;
@@ -80,7 +79,7 @@ class DefaultOrm implements ObjectManagerAwareInterface, QueryProviderInterface,
      */
     public function createQuery(ResourceEvent $event, $entityClass, $parameters)
     {
-        $request = $this->getServiceLocator()->get('Application')->getRequest()->getQuery()->toArray();
+        $request = $this->getServiceLocator()->getServiceLocator()->get('ControllerPluginManager')->get('params')->fromQuery();
 
         $queryBuilder = $this->getObjectManager()->createQueryBuilder();
         $queryBuilder->select('row')
@@ -88,7 +87,7 @@ class DefaultOrm implements ObjectManagerAwareInterface, QueryProviderInterface,
 
         if (isset($request['filter'])) {
             $metadata = $this->getObjectManager()->getMetadataFactory()->getAllMetadata();
-            $filterManager = $this->getServiceLocator()->get('ZfDoctrineQueryBuilderFilterManagerOrm');
+            $filterManager = $this->getServiceLocator()->getServiceLocator()->get('ZfDoctrineQueryBuilderFilterManagerOrm');
             $filterManager->filter(
                 $queryBuilder,
                 $metadata[0],
@@ -98,7 +97,7 @@ class DefaultOrm implements ObjectManagerAwareInterface, QueryProviderInterface,
 
         if (isset($request['order-by'])) {
             $metadata = $this->getObjectManager()->getMetadataFactory()->getAllMetadata();
-            $orderByManager = $this->getServiceLocator()->get('ZfDoctrineQueryBuilderOrderByManagerOrm');
+            $orderByManager = $this->getServiceLocator()->getServiceLocator()->get('ZfDoctrineQueryBuilderOrderByManagerOrm');
             $orderByManager->orderBy(
                 $queryBuilder,
                 $metadata[0],
