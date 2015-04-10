@@ -9,7 +9,7 @@ This library provides query builder directives from array parameters.  This libr
 Philosophy
 ----------
 
-Given developers identified A and B:  A == B with respect to ability and desire to fitler and sort the entity data.
+Given developers identified A and B:  A == B with respect to ability and desire to filter and sort the entity data.
 
 The Doctrine entity to share contains
 ```
