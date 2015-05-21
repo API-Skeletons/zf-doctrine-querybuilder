@@ -78,16 +78,16 @@ Configuration example
 Request example
 ```php
 $_GET = array(
-    'filters' => array(
+    'filter' => array(
         array(
             'type' => 'eq',
             'field' => 'name',
             'value' => 'Tom',
         ),
     ),
-    'orderBy' => array(
+    'order-by' => array(
         array(
-            'type' => 'field,
+            'type' => 'field',
             'field' => 'startAt',
             'direction' => 'desc',
         ),
@@ -109,8 +109,8 @@ $queryBuilder->select('row')
 ;
 
 $metadata = $objectManager->getMetadataFactory()->getAllMetadata();
-$filterManager->filter($queryBuilder, $metadata[0], $_GET['filters']);
-$orderByManager->orderBy($queryBuilder, $metadata[0], $_GET['orderby']);
+$filterManager->filter($queryBuilder, $metadata[0], $_GET['filter']);
+$orderByManager->orderBy($queryBuilder, $metadata[0], $_GET['order-by']);
 
 $result = $queryBuilder->getQuery()->getResult();
 ```
@@ -139,7 +139,7 @@ $(function() {
         url: "http://localhost:8081/api/db/entity/user_data",
         type: "GET",
         data: {
-            'filters': [
+            'filter': [
             {
                 'field': 'cycle',
                 'where': 'or',
