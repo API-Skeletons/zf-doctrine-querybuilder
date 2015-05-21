@@ -5,6 +5,10 @@
  */
 
 return array(
+    'zf-doctrine-querybuilder-options' => array(
+        'filter_key' => 'filter',
+        'order_by_key' => 'order-by',
+    ),
     'zf-doctrine-querybuilder-orderby-orm' => array(
         'invokables' => array(
             'field' => 'ZF\Doctrine\QueryBuilder\OrderBy\ORM\Field',
