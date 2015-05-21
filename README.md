@@ -236,7 +236,7 @@ To enable inner join add this to your configuration.
 ```php
     'zf-doctrine-querybuilder-filter-orm' => array(
         'invokables' => array(
-            'innerjoin' => 'ZF\Apigility\Doctrine\Server\Collection\Filter\ORM\InnerJoin',
+            'innerjoin' => 'ZF\Doctrine\QueryBuilder\Filter\ORM\InnerJoin',
         ),
     ),
 ```
