@@ -44,9 +44,9 @@ Copy `config/zf-doctrine-querybuilder.global.php.dist` to `config/autoload/zf-do
 Use With Apigility Doctrine
 ---------------------------
 
-To enable all filters you may override the default query providers in zf-apigility-doctrine.  Add this to your ```zf-doctrine-querybuilder.global.php``` config file and filters and order-by will be applied if the are in ```$_GET['filter']``` or ```$_GET['order-by']``` request.
+To enable all filters you may override the default query providers in zf-apigility-doctrine.  Add this to your `zf-doctrine-querybuilder.global.php` config file and filters and order-by will be applied if the are in `$_GET['filter']` or `$_GET['order-by']` request.  These $_GET keys are customizable through `zf-doctrine-querybuilder-options`
 
-```
+```php
 'zf-apigility-doctrine-query-provider' => array(
     'invokables' => array(
         'default_orm' => 'ZF\Doctrine\QueryBuilder\Query\Provider\DefaultOrm',
