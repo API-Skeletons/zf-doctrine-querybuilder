@@ -86,7 +86,7 @@ class DefaultOrm implements ObjectManagerAwareInterface, QueryProviderInterface,
         $queryBuilder->select('row')
             ->from($entityClass, 'row');
 
-        if (isset($request['filter'])) {
+        if (isset($request[$this->getFilterKey()])) {
             $metadata = $this->getObjectManager()->getMetadataFactory()
                 ->getAllMetadata();
             $filterManager = $this->getServiceLocator()->getServiceLocator()
@@ -94,11 +94,11 @@ class DefaultOrm implements ObjectManagerAwareInterface, QueryProviderInterface,
             $filterManager->filter(
                 $queryBuilder,
                 $metadata[0],
-                $request['filter']
+                $request[$this->getFilterKey()]
             );
         }
 
-        if (isset($request['order-by'])) {
+        if (isset($request[$this->getOrderByKey()])) {
             $metadata = $this->getObjectManager()->getMetadataFactory()
                 ->getAllMetadata();
             $orderByManager = $this->getServiceLocator()->getServiceLocator()
@@ -106,7 +106,7 @@ class DefaultOrm implements ObjectManagerAwareInterface, QueryProviderInterface,
             $orderByManager->orderBy(
                 $queryBuilder,
                 $metadata[0],
-                $request['order-by']
+                $request[$this->getOrderByKey()]
             );
         }
 
@@ -141,5 +141,37 @@ class DefaultOrm implements ObjectManagerAwareInterface, QueryProviderInterface,
             ->from($entityClass, 'row');
 
         return (int) $queryBuilder->getQuery()->getSingleScalarResult();
+    }
+
+    /**
+     * @return string
+     */
+    protected function getFilterKey()
+    {
+        $config = $this->getServiceLocator()->getServiceLocator()->get('Config');
+
+        if (isset($config['zf-doctrine-querybuilder-options']['filter_key'])) {
+            $filterKey = $config['zf-doctrine-querybuilder-options']['filter_key'];
+        } else {
+            $filterKey = 'filter';
+        }
+
+        return $filterKey;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getOrderByKey()
+    {
+        $config = $this->getServiceLocator()->getServiceLocator()->get('Config');
+
+        if (isset($config['zf-doctrine-querybuilder-options']['order_by_key'])) {
+            $orderByKey = $config['zf-doctrine-querybuilder-options']['order_by_key'];
+        } else {
+            $orderByKey = 'order-by';
+        }
+
+        return $orderByKey;
     }
 }

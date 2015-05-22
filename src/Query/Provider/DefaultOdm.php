@@ -76,23 +76,23 @@ class DefaultOdm implements QueryProviderInterface, ServiceLocatorAwareInterface
         $queryBuilder = $this->getObjectManager()->createQueryBuilder();
         $queryBuilder->find($entityClass);
 
-        if (isset($request['filter'])) {
+        if (isset($request[$this->getFilterKey()])) {
             $metadata = $this->getObjectManager()->getMetadataFactory()->getAllMetadata();
             $filterManager = $this->getServiceLocator()->get('ZfDoctrineQueryBuilderFilterManagerOrm');
             $filterManager->filter(
                 $queryBuilder,
                 $metadata[0],
-                $request['filter']
+                $request[$this->getFilterKey()]
             );
         }
 
-        if (isset($request['order-by'])) {
+        if (isset($request[$this->getOrderByKey()])) {
             $metadata = $this->getObjectManager()->getMetadataFactory()->getAllMetadata();
             $orderByManager = $this->getServiceLocator()->get('ZfDoctrineQueryBuilderOrderByManagerOrm');
             $orderByManager->orderBy(
                 $queryBuilder,
                 $metadata[0],
-                $request['order-by']
+                $request[$this->getOrderByKey()]
             );
         }
 
@@ -123,5 +123,37 @@ class DefaultOdm implements QueryProviderInterface, ServiceLocatorAwareInterface
         $count = $queryBuilder->getQuery()->execute()->count();
 
         return $count;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getFilterKey()
+    {
+        $config = $this->getServiceLocator()->getServiceLocator()->get('Config');
+
+        if (isset($config['zf-doctrine-querybuilder-options']['filter_key'])) {
+            $filterKey = $config['zf-doctrine-querybuilder-options']['filter_key'];
+        } else {
+            $filterKey = 'filter';
+        }
+
+        return $filterKey;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getOrderByKey()
+    {
+        $config = $this->getServiceLocator()->getServiceLocator()->get('Config');
+
+        if (isset($config['zf-doctrine-querybuilder-options']['order_by_key'])) {
+            $orderByKey = $config['zf-doctrine-querybuilder-options']['order_by_key'];
+        } else {
+            $orderByKey = 'order-by';
+        }
+
+        return $orderByKey;
     }
 }
