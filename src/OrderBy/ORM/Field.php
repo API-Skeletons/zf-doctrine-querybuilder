@@ -20,6 +20,6 @@ class Field extends AbstractOrderBy
             throw new Exception('Invalid direction in orderby directive');
         }
 
-        $queryBuilder->orderBy($option['alias'] . '.' . $option['field'], $option['direction']);
+        $queryBuilder->addOrderBy($option['alias'] . '.' . $option['field'], $option['direction']);
     }
 }
