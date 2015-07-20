@@ -28,7 +28,7 @@ Installation
 Installation of this module uses composer. For composer documentation, please refer to [getcomposer.org](http://getcomposer.org/).
 
 ``` console
-$ php composer.phar require zfcampus/zf-doctrine-querybuilder ~2.0
+$ php composer.phar require zfcampus/zf-doctrine-querybuilder ^1.3
 ```
 
 Once installed, add `ZF\Doctrine\QueryBuilder` to your list of modules inside
