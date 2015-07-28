@@ -37,6 +37,7 @@ return array(
             'between' => 'ZF\Doctrine\QueryBuilder\Filter\ORM\Between',
             'like' => 'ZF\Doctrine\QueryBuilder\Filter\ORM\Like',
             'notlike' => 'ZF\Doctrine\QueryBuilder\Filter\ORM\NotLike',
+            'ismemberof' => 'ZF\Doctrine\QueryBuilder\Filter\ORM\IsMemberOf',
             'orx' => 'ZF\Doctrine\QueryBuilder\Filter\ORM\OrX',
             'andx' => 'ZF\Doctrine\QueryBuilder\Filter\ORM\AndX',
             'innerjoin' => 'ZF\Doctrine\QueryBuilder\Filter\ORM\InnerJoin',
