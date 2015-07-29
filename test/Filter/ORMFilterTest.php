@@ -16,7 +16,7 @@ class ORMFilterTest extends AbstractHttpControllerTestCase
     {
         $serviceManager = $this->getApplication()->getServiceManager();
         $filterManager = $serviceManager->get('ZfDoctrineQueryBuilderFilterManagerOrm');
-        $objectManager = $serviceManager->get('doctrine.entitymanager.orm_default');
+        $objectManager = $this->objectManager;
 
         $queryBuilder = $objectManager->createQueryBuilder();
         $queryBuilder->select('row')
@@ -38,7 +38,8 @@ class ORMFilterTest extends AbstractHttpControllerTestCase
         parent::setUp();
 
         $serviceManager = $this->getApplication()->getServiceManager();
-        $this->objectManager = $objectManager = $serviceManager->get('doctrine.entitymanager.orm_default');
+        $this->objectManager = $serviceManager->get('doctrine.entitymanager.orm_default');
+        $objectManager = $this->objectManager;
 
         $tool = new SchemaTool($objectManager);
         $res = $tool->createSchema($objectManager->getMetadataFactory()->getAllMetadata());
