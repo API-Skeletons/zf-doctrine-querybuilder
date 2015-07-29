@@ -71,7 +71,8 @@ class DefaultOdm implements QueryProviderInterface, ServiceLocatorAwareInterface
      */
     public function createQuery(ResourceEvent $event, $entityClass, $parameters)
     {
-        $request = $this->getServiceLocator()->getServiceLocator()->get('Application')->getRequest()->getQuery()->toArray();
+        $request = $this->getServiceLocator()
+            ->getServiceLocator()->get('Application')->getRequest()->getQuery()->toArray();
 
         $queryBuilder = $this->getObjectManager()->createQueryBuilder();
         $queryBuilder->find($entityClass);
