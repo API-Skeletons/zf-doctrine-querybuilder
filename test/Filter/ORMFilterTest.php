@@ -9,11 +9,14 @@ use Db\Entity;
 
 class ORMFilterTest extends AbstractHttpControllerTestCase
 {
+
+    protected $objectManager;
+
     private function countResult($filters, $entity = 'Db\Entity\Artist')
     {
         $serviceManager = $this->getApplication()->getServiceManager();
         $filterManager = $serviceManager->get('ZfDoctrineQueryBuilderFilterManagerOrm');
-        $objectManager = $serviceManager->get('doctrine.entitymanager.orm_default');
+        $objectManager = $this->objectManager;
 
         $queryBuilder = $objectManager->createQueryBuilder();
         $queryBuilder->select('row')
@@ -35,7 +38,8 @@ class ORMFilterTest extends AbstractHttpControllerTestCase
         parent::setUp();
 
         $serviceManager = $this->getApplication()->getServiceManager();
-        $objectManager = $serviceManager->get('doctrine.entitymanager.orm_default');
+        $this->objectManager = $serviceManager->get('doctrine.entitymanager.orm_default');
+        $objectManager = $this->objectManager;
 
         $tool = new SchemaTool($objectManager);
         $res = $tool->createSchema($objectManager->getMetadataFactory()->getAllMetadata());
@@ -93,6 +97,11 @@ class ORMFilterTest extends AbstractHttpControllerTestCase
         $album5->setCreatedAt(new DateTime('2013-12-18 13:17:17'));
         $album5->setArtist($artist2);
         $objectManager->persist($album5);
+
+        $album6 = new Entity\Album;
+        $album6->setName('AlbumSix');
+        $album6->setCreatedAt(new DateTime('2013-12-18 13:17:17'));
+        $objectManager->persist($album6);
 
         $objectManager->flush();
     }
@@ -805,6 +814,38 @@ class ORMFilterTest extends AbstractHttpControllerTestCase
         );
 
         $this->assertEquals(1, $this->countResult($filters));
+    }
+
+    public function testIsMemberOf()
+    {
+        $albumOneId = $this->objectManager
+            ->getRepository('Db\Entity\Album')
+            ->findOneBy(array('name' => 'AlbumOne'))
+            ->getId();
+        $albumSixId = $this->objectManager
+            ->getRepository('Db\Entity\Album')
+            ->findOneBy(array('name' => 'AlbumSix'))
+            ->getId();
+
+        $filters = array(
+            array(
+                'type' => 'ismemberof',
+                'where' => 'and',
+                'field' => 'album',
+                'value' => $albumOneId,
+            )
+        );
+        $this->assertEquals(1, $this->countResult($filters));
+
+        $filters = array(
+            array(
+                'type' => 'ismemberof',
+                'where' => 'and',
+                'field' => 'album',
+                'value' => $albumSixId,
+            )
+        );
+        $this->assertEquals(0, $this->countResult($filters));
     }
 
     public function testInnerJoin()
