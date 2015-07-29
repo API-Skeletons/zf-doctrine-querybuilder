@@ -164,6 +164,7 @@ $(function() {
 Querying Relations
 ------------------
 
+### Single valued
 It is possible to query collections by relations - just supply the relation name as `fieldName` and
 identifier as `value`.
 
@@ -195,6 +196,27 @@ find all users that belong to UserGroup id #1 by querying the user resource with
     array('type' => 'eq', 'field' => 'group', 'value' => '1')
 ```
 
+### Collection valued
+To match entities A that have entity B in a collection use `ismemberof`.
+Assuming `User` has a ManyToMany (or OneToMany) association with `UserGroup`...
+
+```php
+/**
+ * @Entity
+ */
+class User {
+    /**
+     * @ManyToMany(targetEntity="UserGroup")
+     * @var UserGroup[]|ArrayCollection
+     */
+    protected $groups;
+}
+```
+find all users that belong to UserGroup id #1 by querying the user resource with the following filter:
+
+```php
+    array('type' => 'ismemberof', 'field' => 'groups', 'value' => '1')
+```
 
 Format of Date Fields
 ---------------------
@@ -322,6 +344,12 @@ array('type' => 'like', 'field' => 'fieldName', 'value' => 'like%search')
 ```
 
 ### ORM Only
+
+Is Member Of:
+
+```php
+array('type' => 'ismemberof', 'field' => 'fieldName', 'value' => 1)
+```
 
 AndX:
 
