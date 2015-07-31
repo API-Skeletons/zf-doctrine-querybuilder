@@ -79,7 +79,8 @@ class DefaultOdm implements QueryProviderInterface, ServiceLocatorAwareInterface
 
         if (isset($request[$this->getFilterKey()])) {
             $metadata = $this->getObjectManager()->getMetadataFactory()->getAllMetadata();
-            $filterManager = $this->getServiceLocator()->get('ZfDoctrineQueryBuilderFilterManagerOrm');
+            $filterManager = $this->getServiceLocator()
+                ->getServiceLocator()->get('ZfDoctrineQueryBuilderFilterManagerOdm');
             $filterManager->filter(
                 $queryBuilder,
                 $metadata[0],
@@ -89,7 +90,8 @@ class DefaultOdm implements QueryProviderInterface, ServiceLocatorAwareInterface
 
         if (isset($request[$this->getOrderByKey()])) {
             $metadata = $this->getObjectManager()->getMetadataFactory()->getAllMetadata();
-            $orderByManager = $this->getServiceLocator()->get('ZfDoctrineQueryBuilderOrderByManagerOrm');
+            $orderByManager = $this->getServiceLocator()
+                ->getServiceLocator()->get('ZfDoctrineQueryBuilderOrderByManagerOdm');
             $orderByManager->orderBy(
                 $queryBuilder,
                 $metadata[0],
