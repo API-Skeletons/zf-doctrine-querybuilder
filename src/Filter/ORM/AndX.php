@@ -6,6 +6,8 @@
 
 namespace ZF\Doctrine\QueryBuilder\Filter\ORM;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 class AndX extends AbstractFilter
 {
     public function filter($queryBuilder, $metadata, $option)
@@ -36,7 +38,9 @@ class AndX extends AbstractFilter
 
         $dqlParts = $qb->getDqlParts();
         $andX->addMultiple($dqlParts['where']->getParts());
-        $queryBuilder->setParameters($qb->getParameters());
+        $queryBuilder->setParameters(
+            new ArrayCollection($queryBuilder->getParameters()->toArray(), $qb->getParameters()->toArray())
+        );
 
         $queryBuilder->$queryType($andX);
     }
