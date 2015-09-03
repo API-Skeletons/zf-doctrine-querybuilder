@@ -40,7 +40,10 @@ class OrX extends AbstractFilter
         $dqlParts = $qb->getDqlParts();
         $orX->addMultiple($dqlParts['where']->getParts());
         $queryBuilder->setParameters(
-            new ArrayCollection($queryBuilder->getParameters()->toArray(), $qb->getParameters()->toArray())
+            new ArrayCollection(array_merge_recursive(
+                $queryBuilder->getParameters()->toArray(),
+                $qb->getParameters()->toArray()
+            ))
         );
 
         $queryBuilder->$queryType($orX);
