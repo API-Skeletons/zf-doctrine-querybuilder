@@ -25,7 +25,8 @@
         "zendframework/zend-modulemanager": "~2.3",
         "zendframework/zend-mvc": "~2.3",
         "zendframework/zend-servicemanager": "~2.3",
-        "zfcampus/zf-api-problem": "~1.0"
+        "zfcampus/zf-api-problem": "~1.0",
+        "zfcampus/zf-hal": "^1.2@dev"
     },
     "require-dev": {
         "doctrine/doctrine-mongo-odm-module": "0.*@dev",
