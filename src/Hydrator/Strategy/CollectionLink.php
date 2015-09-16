@@ -57,10 +57,16 @@ class CollectionLink extends AbstractCollectionStrategy implements
             $filterKey = 'filter';
         }
 
+        $filterValue = array(
+            'field' => $mapping['mappedBy'] ? : $mapping['inversedBy'],
+            'type' =>isset($mapping['joinTable']) ? 'ismemberof' : 'eq',
+            'value' => $value->getOwner()->getId(),
+        );
+
         $link->setRouteOptions(array(
             'query' => array(
                 $filterKey => array(
-                    array('field' => $mapping['mappedBy'], 'type'=>'eq', 'value' => $value->getOwner()->getId()),
+                    $filterValue,
                 ),
             ),
         ));
