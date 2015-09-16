@@ -20,21 +20,21 @@
         }
     ],
     "require": {
-        "php": ">=5.3.23",
-        "doctrine/doctrine-module": "~0.8@dev",
-        "zendframework/zend-modulemanager": "~2.3",
-        "zendframework/zend-mvc": "~2.3",
-        "zendframework/zend-servicemanager": "~2.3",
-        "zfcampus/zf-api-problem": "~1.0",
-        "zfcampus/zf-hal": "^1.2@dev"
+        "php": ">=5.4",
+        "doctrine/doctrine-module": "^0.9",
+        "zendframework/zend-modulemanager": "^2.5",
+        "zendframework/zend-mvc": "^2.5",
+        "zendframework/zend-servicemanager": "^2.5",
+        "zfcampus/zf-api-problem": "^1.1",
+        "zfcampus/zf-hal": "^1.2"
     },
     "require-dev": {
         "doctrine/doctrine-mongo-odm-module": "0.*@dev",
         "doctrine/doctrine-orm-module": "0.*@dev",
-        "phpunit/phpunit": "~4.1",
-        "zendframework/zendframework": "~2.4",
-        "zfcampus/zf-apigility-provider": "~1.0",
-        "squizlabs/php_codesniffer": "~2.0"
+        "phpunit/phpunit": "^4.1",
+        "zendframework/zendframework": "^2.5",
+        "zfcampus/zf-apigility-provider": "^1.1",
+        "squizlabs/php_codesniffer": "^2.0"
     },
     "suggest": {
         "ext/mongo": "Mongo extension, if using ODM",
