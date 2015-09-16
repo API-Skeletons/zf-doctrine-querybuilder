@@ -87,25 +87,23 @@ class DefaultOrm implements ObjectManagerAwareInterface, QueryProviderInterface,
             ->from($entityClass, 'row');
 
         if (isset($request[$this->getFilterKey()])) {
-            $metadata = $this->getObjectManager()->getMetadataFactory()
-                ->getAllMetadata();
+            $metadata = $this->getObjectManager()->getClassMetadata($entityClass);
             $filterManager = $this->getServiceLocator()->getServiceLocator()
                 ->get('ZfDoctrineQueryBuilderFilterManagerOrm');
             $filterManager->filter(
                 $queryBuilder,
-                $metadata[0],
+                $metadata,
                 $request[$this->getFilterKey()]
             );
         }
 
         if (isset($request[$this->getOrderByKey()])) {
-            $metadata = $this->getObjectManager()->getMetadataFactory()
-                ->getAllMetadata();
+            $metadata = $this->getObjectManager()->getClassMetadata($entityClass);
             $orderByManager = $this->getServiceLocator()->getServiceLocator()
                 ->get('ZfDoctrineQueryBuilderOrderByManagerOrm');
             $orderByManager->orderBy(
                 $queryBuilder,
-                $metadata[0],
+                $metadata,
                 $request[$this->getOrderByKey()]
             );
         }
