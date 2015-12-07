@@ -51,7 +51,8 @@ abstract class AbstractFilter implements FilterInterface
                 settype($value, 'boolean');
                 break;
             case 'decimal':
-                settype($value, 'decimal');
+            case 'float':
+                settype($value, 'float');
                 break;
             case 'date':
                 if ($value && ! $doNotTypecastDatetime) {
@@ -76,9 +77,6 @@ abstract class AbstractFilter implements FilterInterface
                     }
                     $value = DateTime::createFromFormat($format, $value);
                 }
-                break;
-            case 'float':
-                settype($value, 'float');
                 break;
             default:
                 break;
