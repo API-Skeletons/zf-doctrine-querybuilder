@@ -253,6 +253,57 @@ class ORMFilterTest extends AbstractHttpControllerTestCase
         $this->assertEquals(2, $this->countResult($filters));
     }
 
+    public function testEqualsWithoutAlias()
+    {
+        $filters = array(
+            array(
+                'no-alias' => true,
+                'field' => 'CONCAT(\'Sir\', row.name)',
+                'type' => 'eq',
+                'value' => 'SirArtistOne'
+            ),
+        );
+
+        $this->assertEquals(1, $this->countResult($filters));
+
+
+        $filters = array(
+            array(
+                'no-alias' => true,
+                'field' => 'row.createdAt',
+                'where' => 'and',
+                'type' => 'eq',
+                'value' => '2014-12-18 13:17:17',
+                'format' => 'Y-m-d H:i:s'
+            ),
+        );
+
+        $this->assertEquals(1, $this->countResult($filters));
+
+
+        $filters = array(
+            array(
+                'no-alias' => true,
+                'field' => 'row.createdAt',
+                'where' => 'or',
+                'type' => 'eq',
+                'value' => '2014-12-18 13:17:17',
+                'format' => 'Y-m-d H:i:s'
+            ),
+
+            array(
+                'no-alias' => true,
+                'field' => 'row.createdAt',
+                'where' => 'or',
+                'type' => 'eq',
+                'value' => '2012-12-18 13:17:17',
+                'format' => 'Y-m-d H:i:s'
+            ),
+        );
+
+        $this->assertEquals(2, $this->countResult($filters));
+    }
+
     public function testNotEquals()
     {
         $filters = array(
@@ -300,6 +351,57 @@ class ORMFilterTest extends AbstractHttpControllerTestCase
         $this->assertEquals(2, $this->countResult($filters));
     }
 
+    public function testNotEqualsWithoutAlias()
+    {
+        $filters = array(
+            array(
+                'no-alias' => true,
+                'field' => 'UPPER(row.name)',
+                'type' => 'neq',
+                'value' => 'ARTISTONE'
+            ),
+        );
+
+        $this->assertEquals(4, $this->countResult($filters));
+
+
+        $filters = array(
+            array(
+                'no-alias' => true,
+                'field' => 'row.createdAt',
+                'where' => 'or',
+                'type' => 'neq',
+                'value' => '2014-12-18 13:17:17',
+                'format' => 'Y-m-d H:i:s'
+            ),
+        );
+
+        $this->assertEquals(3, $this->countResult($filters));
+
+
+        $filters = array(
+            array(
+                'no-alias' => true,
+                'field' => 'row.createdAt',
+                'where' => 'and',
+                'type' => 'neq',
+                'value' => '2014-12-18 13:17:17',
+                'format' => 'Y-m-d H:i:s'
+            ),
+
+            array(
+                'no-alias' => true,
+                'field' => 'row.createdAt',
+                'where' => 'and',
+                'type' => 'neq',
+                'value' => '2012-12-18 13:17:17',
+                'format' => 'Y-m-d H:i:s'
+            ),
+        );
+
+        $this->assertEquals(2, $this->countResult($filters));
+    }
+
     public function testLessThan()
     {
         $filters = array(
@@ -336,6 +438,55 @@ class ORMFilterTest extends AbstractHttpControllerTestCase
 
             array(
                 'field' => 'name',
+                'where' => 'or',
+                'type' => 'eq',
+                'value' => 'ArtistTwo'
+            ),
+        );
+
+        $this->assertEquals(3, $this->countResult($filters));
+    }
+
+    public function testLessThanWithoutAlias()
+    {
+        $filters = array(
+            array(
+                'no-alias' => true,
+                'field' => 'row.createdAt',
+                'type' => 'lt',
+                'value' => '2014-01-01',
+                'format' => 'Y-m-d'
+            ),
+        );
+
+        $this->assertEquals(3, $this->countResult($filters));
+
+
+        $filters = array(
+            array(
+                'no-alias' => true,
+                'field' => 'row.createdAt',
+                'where' => 'and',
+                'type' => 'lt',
+                'value' => '2013-12-18 13:17:17',
+            ),
+        );
+
+        $this->assertEquals(2, $this->countResult($filters));
+
+
+        $filters = array(
+            array(
+                'no-alias' => true,
+                'field' => 'row.createdAt',
+                'where' => 'or',
+                'type' => 'lt',
+                'value' => '2013-12-18 13:17:17'
+            ),
+
+            array(
+                'no-alias' => true,
+                'field' => 'row.name',
                 'where' => 'or',
                 'type' => 'eq',
                 'value' => 'ArtistTwo'
@@ -401,6 +552,21 @@ class ORMFilterTest extends AbstractHttpControllerTestCase
         $this->assertEquals(4, $this->countResult($filters));
     }
 
+    public function testLessThanOrEqualsWithoutAlias()
+    {
+        $filters = array(
+            array(
+                'no-alias' => true,
+                'field' => 'DATE_ADD(row.createdAt, 1, \'DAY\')',
+                'type' => 'lte',
+                'value' => '2011-12-20',
+                'format' => 'Y-m-d',
+            ),
+        );
+
+        $this->assertEquals(1, $this->countResult($filters));
+    }
+
     public function testGreaterThan()
     {
         $filters = array(
@@ -438,6 +604,57 @@ class ORMFilterTest extends AbstractHttpControllerTestCase
 
             array(
                 'field' => 'createdAt',
+                'where' => 'and',
+                'type' => 'gt',
+                'value' => '2012-12-18 13:17:17',
+                'format' => 'Y-m-d H:i:s',
+            ),
+        );
+
+        $this->assertEquals(1, $this->countResult($filters));
+    }
+
+    public function testGreaterThanWithoutAlias()
+    {
+        $filters = array(
+            array(
+                'no-alias' => true,
+                'field' => 'row.createdAt',
+                'type' => 'gt',
+                'value' => '2014-01-01',
+                'format' => 'Y-m-d'
+            ),
+        );
+
+        $this->assertEquals(1, $this->countResult($filters));
+
+
+        $filters = array(
+            array(
+                'no-alias' => true,
+                'field' => 'row.createdAt',
+                'where' => 'or',
+                'type' => 'gt',
+                'value' => '2013-12-18 13:17:17',
+                'format' => 'Y-m-d H:i:s',
+            ),
+        );
+
+        $this->assertEquals(1, $this->countResult($filters));
+
+        $filters = array(
+            array(
+                'no-alias' => true,
+                'field' => 'row.createdAt',
+                'where' => 'and',
+                'type' => 'gt',
+                'value' => '2013-12-18 13:17:17',
+                'format' => 'Y-m-d H:i:s'
+            ),
+
+            array(
+                'no-alias' => true,
+                'field' => 'row.createdAt',
                 'where' => 'and',
                 'type' => 'gt',
                 'value' => '2012-12-18 13:17:17',
@@ -506,6 +723,69 @@ class ORMFilterTest extends AbstractHttpControllerTestCase
         $this->assertEquals(3, $this->countResult($filters));
     }
 
+    public function testGreaterThanOrEqualsWithoutAlias()
+    {
+        $filters = array(
+            array(
+                'no-alias' => true,
+                'field' => 'DATE_ADD(row.createdAt, 1, \'DAY\')',
+                'type' => 'gte',
+                'value' => '2013-12-19 13:17:17',
+            ),
+        );
+
+        $this->assertEquals(1, $this->countResult($filters));
+
+
+        $filters = array(
+            array(
+                'no-alias' => true,
+                'field' => 'DATE_ADD(row.createdAt, 1, \'DAY\')',
+                'type' => 'gte',
+                'value' => '2014-12-19 13:17:18',
+            ),
+        );
+
+        $this->assertEquals(0, $this->countResult($filters));
+
+
+        $filters = array(
+            array(
+                'no-alias' => true,
+                'field' => 'row.createdAt',
+                'where' => 'and',
+                'type' => 'gte',
+                'value' => '2013-12-18 13:17:17',
+                'format' => 'Y-m-d H:i:s',
+            ),
+        );
+
+        $this->assertEquals(2, $this->countResult($filters));
+
+
+        $filters = array(
+            array(
+                'no-alias' => true,
+                'field' => 'DATE_ADD(row.createdAt, 1, \'DAY\')',
+                'where' => 'or',
+                'type' => 'gte',
+                'value' => '2013-12-18 13:17:17',
+                'format' => 'Y-m-d H:i:s'
+            ),
+
+            array(
+                'no-alias' => true,
+                'field' => 'DATE_ADD(row.createdAt, 1, \'DAY\')',
+                'where' => 'or',
+                'type' => 'gte',
+                'value' => '2012-12-18 13:17:17',
+                'format' => 'Y-m-d H:i:s'
+            ),
+        );
+
+        $this->assertEquals(3, $this->countResult($filters));
+    }
+
     public function testIsNull()
     {
         $serviceManager = $this->getApplication()->getServiceManager();
@@ -541,6 +821,54 @@ class ORMFilterTest extends AbstractHttpControllerTestCase
 
             array(
                 'field' =>'name',
+                'where' => 'or',
+                'type' => 'eq',
+                'value' => 'ArtistOne',
+            ),
+        );
+
+        $this->assertEquals(2, $this->countResult($filters));
+    }
+
+    public function testIsNullWithoutAlias()
+    {
+        $serviceManager = $this->getApplication()->getServiceManager();
+        $objectManager = $serviceManager->get('doctrine.entitymanager.orm_default');
+
+        $filters = array(
+            array(
+                'no-alias' => true,
+                'field' => 'row.createdAt',
+                'type' => 'isnull',
+            ),
+        );
+
+        $this->assertEquals(1, $this->countResult($filters));
+
+
+        $filters = array(
+            array(
+                'no-alias' => true,
+                'field' => 'row.createdAt',
+                'where' => 'and',
+                'type' => 'isnull',
+            ),
+        );
+
+        $this->assertEquals(1, $this->countResult($filters));
+
+
+        $filters = array(
+            array(
+                'no-alias' => true,
+                'field' =>'row.createdAt',
+                'where' => 'or',
+                'type' => 'isnull',
+            ),
+
+            array(
+                'no-alias' => true,
+                'field' =>'row.name',
                 'where' => 'or',
                 'type' => 'eq',
                 'value' => 'ArtistOne',
@@ -591,6 +919,51 @@ class ORMFilterTest extends AbstractHttpControllerTestCase
         $this->assertEquals(5, $this->countResult($filters));
     }
 
+    public function testIsNotNullWithoutAlias()
+    {
+        $filters = array(
+            array(
+                'no-alias' => true,
+                'field' => 'row.createdAt',
+                'type'=> 'isnotnull',
+            ),
+        );
+
+        $this->assertEquals(4, $this->countResult($filters));
+
+
+        $filters = array(
+            array(
+                'no-alias' => true,
+                'field' => 'row.createdAt',
+                'where' => 'and',
+                'type' => 'isnotnull',
+            ),
+        );
+
+        $this->assertEquals(4, $this->countResult($filters));
+
+
+        $filters = array(
+            array(
+                'no-alias' => true,
+                'field' => 'row.createdAt',
+                'where' => 'or',
+                'type' => 'isnotnull',
+            ),
+
+            array(
+                'no-alias' => true,
+                'field' => 'row.name',
+                'where' => 'or',
+                'type' => 'eq',
+                'value' => 'ArtistFive',
+            ),
+        );
+
+        $this->assertEquals(5, $this->countResult($filters));
+    }
+
     public function testIn()
     {
         $filters = array(
@@ -621,6 +994,49 @@ class ORMFilterTest extends AbstractHttpControllerTestCase
         $filters = array(
             array(
                 'field' => 'createdAt',
+                'where' => 'or',
+                'type' => 'in',
+                'values' => array('2011-12-18 13:17:17'),
+                'format' => 'Y-m-d H:i:s'
+             ),
+        );
+
+        $this->assertEquals(1, $this->countResult($filters));
+    }
+
+    public function testInWithoutAlias()
+    {
+        $filters = array(
+            array(
+                'no-alias' => true,
+                'field' => 'CONCAT(\'Sir\', row.name)',
+                'type' => 'in',
+                'values' => array(
+                    'SirArtistOne',
+                    'SirArtistTwo',
+                )
+            ),
+        );
+
+        $this->assertEquals(2, $this->countResult($filters));
+
+        $filters = array(
+            array(
+                'no-alias' => true,
+                'field' => 'row.createdAt',
+                'where' => 'and',
+                'type' => 'in',
+                'values' => array('2011-12-18 13:17:17')
+            ),
+        );
+
+        $this->assertEquals(1, $this->countResult($filters));
+
+
+        $filters = array(
+            array(
+                'no-alias' => true,
+                'field' => 'row.createdAt',
                 'where' => 'or',
                 'type' => 'in',
                 'values' => array('2011-12-18 13:17:17'),
@@ -674,6 +1090,52 @@ class ORMFilterTest extends AbstractHttpControllerTestCase
         $this->assertEquals(3, $this->countResult($filters));
     }
 
+    public function testNotInWithoutAlias()
+    {
+        $filters = array(
+            array(
+                'no-alias' => true,
+                'field' => 'CONCAT(\'Sir\', row.name)',
+                'type' => 'notin',
+                'values' => array('SirArtistOne', 'SirArtistTwo')
+            ),
+        );
+
+        $this->assertEquals(3, $this->countResult($filters));
+
+
+        $filters = array(
+            array(
+                'no-alias' => true,
+                'field' => 'row.createdAt',
+                'where' => 'and',
+                'type' => 'notin',
+                'values' => array(
+                    '2011-12-18 13:17:17',
+                    'format' => 'Y-m-d H:i:s'
+                )
+            ),
+        );
+
+        $this->assertEquals(3, $this->countResult($filters));
+
+
+        $filters = array(
+            array(
+                'no-alias' => true,
+                'field' => 'row.createdAt',
+                'where' => 'or',
+                'type' => 'notin',
+                'values' => array(
+                    '2011-12-18 13:17:17',
+                ),
+                'format' => 'Y-m-d H:i:s',
+            ),
+        );
+
+        $this->assertEquals(3, $this->countResult($filters));
+    }
+
     public function testBetween()
     {
         $filters = array(
@@ -715,6 +1177,24 @@ class ORMFilterTest extends AbstractHttpControllerTestCase
         );
 
         $this->assertEquals(2, $this->countResult($filters));
+    }
+
+    public function testBetweenWithoutAlias()
+    {
+        $filters = array(
+            array(
+                'no-alias' => true,
+                'field' => 'DATE_ADD(row.createdAt, 1, \'DAY\')',
+                'where' => 'and',
+                'type' => 'between',
+                'from' => '2012-12-15',
+                'to' => '2013-01-01',
+                'format' => 'Y-m-d',
+            ),
+        );
+
+        $this->assertEquals(1, $this->countResult($filters));
+
     }
 
     public function testLike()
@@ -772,6 +1252,67 @@ class ORMFilterTest extends AbstractHttpControllerTestCase
         $this->assertEquals(4, $this->countResult($filters));
     }
 
+    public function testLikeWithoutAlias()
+    {
+        $filters = array(
+            array(
+                'no-alias' => true,
+                'field' => 'CONCAT(\'Sir\', row.name)',
+                'type' => 'like',
+                'value' => 'SirArtist%',
+            ),
+        );
+
+        $this->assertEquals(5, $this->countResult($filters));
+
+
+        $filters = array(
+            array(
+                'no-alias' => true,
+                'field' => 'CONCAT(\'Sir\', row.name)',
+                'type' => 'like',
+                'value' => '%Two',
+            ),
+        );
+
+        $this->assertEquals(1, $this->countResult($filters));
+
+
+        $filters = array(
+            array(
+                'no-alias' => true,
+                'field' => 'CONCAT(\'Sir\', row.name)',
+                'where' => 'and',
+                'type' => 'like',
+                'value' => '%Art%',
+            ),
+        );
+
+        $this->assertEquals(5, $this->countResult($filters));
+
+
+        $filters = array(
+            array(
+                'no-alias' => true,
+                'field' => 'CONCAT(\'Sir\', row.name)',
+                'where' => 'or',
+                'type' => 'like',
+                'value' => 'SirArtistT%',
+            ),
+
+            array(
+                'no-alias' => true,
+                'field' => 'CONCAT(\'Sir\', row.name)',
+                'where' => 'or',
+                'type' => 'like',
+                'value' => 'SirArtistF%',
+            ),
+        );
+
+        $this->assertEquals(4, $this->countResult($filters));
+    }
+
+
     public function testNotLike()
     {
         $filters = array(
@@ -816,6 +1357,54 @@ class ORMFilterTest extends AbstractHttpControllerTestCase
         $this->assertEquals(1, $this->countResult($filters));
     }
 
+    public function testNotLikeWithoutAlias()
+    {
+        $filters = array(
+            array(
+                'no-alias' => true,
+                'field' => 'CONCAT(\'Sir\', row.name)',
+                'type' => 'notlike',
+                'value' => '%Two',
+            ),
+        );
+
+        $this->assertEquals(4, $this->countResult($filters));
+
+
+        $filters = array(
+            array(
+                'no-alias' => true,
+                'field' => 'CONCAT(\'Sir\', row.name)',
+                'where' => 'and',
+                'type' => 'notlike',
+                'value' => '%SirArt%',
+            ),
+        );
+
+        $this->assertEquals(0, $this->countResult($filters));
+
+
+        $filters = array(
+            array(
+                'no-alias' => true,
+                'field' => 'CONCAT(\'Sir\', row.name)',
+                'where' => 'and',
+                'type' => 'notlike',
+                'value' => 'SirArtistT%',
+            ),
+
+            array(
+                'no-alias' => true,
+                'field' => 'CONCAT(\'Sir\', row.name)',
+                'where' => 'and',
+                'type' => 'notlike',
+                'value' => 'SirArtistF%',
+            ),
+        );
+
+        $this->assertEquals(1, $this->countResult($filters));
+    }
+
     public function testIsMemberOf()
     {
         $albumOneId = $this->objectManager
@@ -842,6 +1431,40 @@ class ORMFilterTest extends AbstractHttpControllerTestCase
                 'type' => 'ismemberof',
                 'where' => 'and',
                 'field' => 'album',
+                'value' => $albumSixId,
+            )
+        );
+        $this->assertEquals(0, $this->countResult($filters));
+    }
+
+    public function testIsMemberOfWithoutAlias()
+    {
+        $albumOneId = $this->objectManager
+            ->getRepository('Db\Entity\Album')
+            ->findOneBy(array('name' => 'AlbumOne'))
+            ->getId();
+        $albumSixId = $this->objectManager
+            ->getRepository('Db\Entity\Album')
+            ->findOneBy(array('name' => 'AlbumSix'))
+            ->getId();
+
+        $filters = array(
+            array(
+                'no-alias' => true,
+                'type' => 'ismemberof',
+                'where' => 'and',
+                'field' => 'row.album',
+                'value' => $albumOneId,
+            )
+        );
+        $this->assertEquals(1, $this->countResult($filters));
+
+        $filters = array(
+            array(
+                'no-alias' => true,
+                'type' => 'ismemberof',
+                'where' => 'and',
+                'field' => 'row.album',
                 'value' => $albumSixId,
             )
         );
