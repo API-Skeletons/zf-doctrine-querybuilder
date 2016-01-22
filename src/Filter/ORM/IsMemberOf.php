@@ -39,10 +39,17 @@ class IsMemberOf extends AbstractFilter
         $value = $this->typeCastField($metadata, $option['field'], $option['value'], $format);
 
         $parameter = uniqid('a');
+
+        if (isset($option['no-alias']) && $option['no-alias']) {
+            $field = $option['field'];
+        } else {
+            $field = $option['alias'] . '.' . $option['field'];
+        }
+
         $queryBuilder->$queryType(
             $queryBuilder
                 ->expr()
-                ->isMemberOf(':' . $parameter, $option['alias'] . '.' . $option['field'])
+                ->isMemberOf(':' . $parameter, $field)
         );
         $queryBuilder->setParameter($parameter, $value);
     }

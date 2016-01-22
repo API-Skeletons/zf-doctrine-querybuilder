@@ -26,11 +26,17 @@ class Like extends AbstractFilter
             $option['alias'] = 'row';
         }
 
+        if (isset($option['no-alias']) && $option['no-alias']) {
+            $field = $option['field'];
+        } else {
+            $field = $option['alias'] . '.' . $option['field'];
+        }
+
         $queryBuilder->$queryType(
             $queryBuilder
                 ->expr()
                 ->like(
-                    $option['alias'] . '.' . $option['field'],
+                    $field,
                     $queryBuilder
                         ->expr()
                         ->literal($option['value'])

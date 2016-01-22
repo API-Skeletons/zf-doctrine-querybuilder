@@ -30,11 +30,17 @@ class NotEquals extends AbstractFilter
 
         $value = $this->typeCastField($metadata, $option['field'], $option['value'], $format);
 
+        if (isset($option['no-alias']) && $option['no-alias']) {
+            $field = $option['field'];
+        } else {
+            $field = $option['alias'] . '.' . $option['field'];
+        }
+
         $parameter = uniqid('a');
         $queryBuilder->$queryType(
             $queryBuilder
                 ->expr()
-                ->neq($option['alias'] . '.' . $option['field'], ':' . $parameter)
+                ->neq($field, ':' . $parameter)
         );
         $queryBuilder->setParameter($parameter, $value);
     }

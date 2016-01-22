@@ -40,10 +40,17 @@ class NotIn extends AbstractFilter
         }
 
         $parameter = uniqid('a');
+
+        if (isset($option['no-alias']) && $option['no-alias']) {
+            $field = $option['field'];
+        } else {
+            $field = $option['alias'] . '.' . $option['field'];
+        }
+
         $queryBuilder->$queryType(
             $queryBuilder
                 ->expr()
-                ->notIn($option['alias'] . '.' . $option['field'], ':' . $parameter)
+                ->notIn($field, ':' . $parameter)
         );
         $queryBuilder->setParameter($parameter, $queryValues);
     }

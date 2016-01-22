@@ -39,11 +39,17 @@ class In extends AbstractFilter
             );
         }
 
+        if (isset($option['no-alias']) && $option['no-alias']) {
+            $field = $option['field'];
+        } else {
+            $field = $option['alias'] . '.' . $option['field'];
+        }
+
         $parameter = uniqid('a');
         $queryBuilder->$queryType(
             $queryBuilder
                 ->expr()
-                ->in($option['alias'] . '.' . $option['field'], ':' . $parameter)
+                ->in($field, ':' . $parameter)
         );
         $queryBuilder->setParameter($parameter, $queryValues);
     }

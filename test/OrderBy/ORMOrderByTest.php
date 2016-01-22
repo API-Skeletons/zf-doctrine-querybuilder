@@ -96,4 +96,22 @@ class ORMOrderByTest extends AbstractHttpControllerTestCase
 
         $this->assertEquals('ABBA', $artist->getName());
     }
+
+    public function testFieldWithoutAlias()
+    {
+        $orderBy = array(
+            array(
+                'no-alias' => true,
+                'type' => 'field',
+                'field' => 'LENGTH(row.name)',
+                'direction' => 'asc',
+            )
+        );
+
+        $result = $this->fetchResult($orderBy);
+        $artist = reset($result);
+
+        $this->assertEquals('ABBA', $artist->getName());
+
+    }
 }

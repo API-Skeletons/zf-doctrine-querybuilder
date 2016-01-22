@@ -31,10 +31,17 @@ class LessThanOrEquals extends AbstractFilter
         $value = $this->typeCastField($metadata, $option['field'], $option['value'], $format);
 
         $parameter = uniqid('a');
+
+        if (isset($option['no-alias']) && $option['no-alias']) {
+            $field = $option['field'];
+        } else {
+            $field = $option['alias'] . '.' . $option['field'];
+        }
+        
         $queryBuilder->$queryType(
             $queryBuilder
                 ->expr()
-                ->lte($option['alias'] . '.' . $option['field'], ':' . $parameter)
+                ->lte($field, ':' . $parameter)
         );
         $queryBuilder->setParameter($parameter, $value);
     }
