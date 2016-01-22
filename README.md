@@ -263,6 +263,31 @@ To enable inner join add this to your configuration.
     ),
 ```
 
+Remove default alias
+---------------------
+
+By default this library define an alias to query called "row".
+To make a query passing a expression, you can remove default alias using `no-alias` option:
+
+You can use any Doctrine function:
+
+```php
+array(
+    'no-alias' => true,
+    'type' => 'UPPER(row.eq)',
+    'field' => 'fieldName',
+    'value' => 'MATCH_VALUE_UPPER'
+)
+```
+
+```php
+array(
+    'no-alias' => true,
+    'type' => 'DATE_ADD(row.created_at, 10, "DAY")',
+    'field' => 'fieldName',
+    'value' => 'match_date'
+)
+```
 
 Included Filter Types
 ---------------------
