@@ -34,11 +34,17 @@ class Between extends AbstractFilter
         $fromParameter = uniqid('a1');
         $toParameter = uniqid('a2');
 
+        if (isset($option['no-alias']) && $option['no-alias']) {
+            $field = $option['field'];
+        } else {
+            $field = sprintf('%s.%s', $option['alias'], $option['field']);
+        }
+
         $queryBuilder->$queryType(
             $queryBuilder
                 ->expr()
                 ->between(
-                    sprintf('%s.%s', $option['alias'], $option['field']),
+                    $field,
                     sprintf(':%s', $fromParameter),
                     sprintf(':%s', $toParameter)
                 )
