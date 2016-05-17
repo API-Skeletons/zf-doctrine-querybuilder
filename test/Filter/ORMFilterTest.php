@@ -902,11 +902,13 @@ class ORMFilterTest extends AbstractHttpControllerTestCase
     {
         $filters = array(
             array(
-                'field' => 'name',
+                'field' => 'name', // optional : field can be separated by ',' like : 'field' => 'field1,field2'
                 'type' => 'match',
                 'value' => 'Five',
             ),
         );
+        
+       
     
         $this->assertEquals(1, $this->countResult($filters));
     }
