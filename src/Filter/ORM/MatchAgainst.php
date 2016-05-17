@@ -50,11 +50,5 @@ class MatchAgainst extends AbstractFilter
             ->setParameter('searchterm', $option['value'])
             ->orderBy('match_score', 'desc');
         
-        // $queryBuilder->$queryType(
-        // $queryBuilder
-        // ->expr()
-        // ->gt($option['alias'] . '.' . $option['field'], ':' . $parameter)
-        // );
-        // $queryBuilder->setParameter($parameter, $value);
     }
 }
