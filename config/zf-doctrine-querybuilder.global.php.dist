@@ -37,6 +37,7 @@ return array(
             'ismemberof' => 'ZF\Doctrine\QueryBuilder\Filter\ORM\IsMemberOf',
             'orx' => 'ZF\Doctrine\QueryBuilder\Filter\ORM\OrX',
             'andx' => 'ZF\Doctrine\QueryBuilder\Filter\ORM\AndX',
+            'match' => 'ZF\Doctrine\QueryBuilder\Filter\ORM\MatchAgainst',
         ),
     ),
 
