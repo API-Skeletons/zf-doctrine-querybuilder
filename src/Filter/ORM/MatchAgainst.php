@@ -41,8 +41,8 @@ class MatchAgainst extends AbstractFilter
             $option['field'] = "{$option['alias']}.{$option['field']}";
         }
         
-        $queryBuilder->addSelect("MATCH ({$option['field']}) AGAINST (:searchterm) AS match_score")
-            ->add('where', "MATCH ({$option['field']}) AGAINST (:searchterm) > 0.8")
+        $queryBuilder->addSelect("MATCH ({$option['field']}) AGAINST (:searchterm boolean) AS HIDDEN match_score")
+            ->add('where', "MATCH ({$option['field']}) AGAINST (:searchterm boolean) > 0.8")
             ->setParameter('searchterm', $option['value'])
             ->orderBy('match_score', 'desc');
     }
