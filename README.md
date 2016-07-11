@@ -108,9 +108,9 @@ $queryBuilder->select('row')
     ->from($entity, 'row')
 ;
 
-$metadata = $objectManager->getMetadataFactory()->getAllMetadata();
-$filterManager->filter($queryBuilder, $metadata[0], $_GET['filter']);
-$orderByManager->orderBy($queryBuilder, $metadata[0], $_GET['order-by']);
+$metadata = $objectManager->getMetadataFactory()->getMetadataFor(ENTITY_NAME); // $e->getEntity() using doctrine resource event
+$filterManager->filter($queryBuilder, $metadata, $_GET['filter']);
+$orderByManager->orderBy($queryBuilder, $metadata, $_GET['order-by']);
 
 $result = $queryBuilder->getQuery()->getResult();
 ```
