@@ -41,6 +41,7 @@ return array(
             'orx' => 'ZF\Doctrine\QueryBuilder\Filter\ORM\OrX',
             'andx' => 'ZF\Doctrine\QueryBuilder\Filter\ORM\AndX',
             'innerjoin' => 'ZF\Doctrine\QueryBuilder\Filter\ORM\InnerJoin',
+            'match' => 'ZF\Doctrine\QueryBuilder\Filter\ORM\MatchAgainst',
         ),
     ),
 

@@ -13,4 +13,13 @@ return array(
             'ZfDoctrineQueryBuilderOrderByManagerOdm' => 'ZF\Doctrine\QueryBuilder\OrderBy\Service\ODMOrderByManagerFactory',
         ),
     ),
+    'doctrine' => array(
+        'configuration' => array(
+            'orm_default' => array(
+                'string_functions' => array(
+                    'MATCH' => 'DoctrineExtensions\Query\MySql\MatchAgainst'
+                )
+            )
+        ),
+    ),
 );

@@ -898,4 +898,18 @@ class ORMFilterTest extends AbstractHttpControllerTestCase
 
         $this->assertEquals(2, $this->countResult($filters, 'Db\Entity\Album'));
     }
+    public function testMatchAgainst()
+    {
+        $filters = array(
+            array(
+                'field' => 'name', // optional : field can be separated by ',' like : 'field' => 'field1,field2'
+                'type' => 'match',
+                'value' => 'Five',
+            ),
+        );
+        
+       
+    
+        $this->assertEquals(1, $this->countResult($filters));
+    }
 }
