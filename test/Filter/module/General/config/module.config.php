@@ -2,10 +2,10 @@
 
 namespace Db;
 
-return array(
-    'service_manager' => array(
-        'invokables' => array(
+return [
+    'service_manager' => [
+        'invokables' => [
             'General\Listener\EventCatcher' => 'General\Listener\EventCatcher',
-        ),
-    ),
-);
+        ],
+    ],
+];

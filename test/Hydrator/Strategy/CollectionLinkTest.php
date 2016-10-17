@@ -92,10 +92,10 @@ class CollectionLinkTest extends PHPUnit_Framework_TestCase
                                 'field' => 'blog',
                                 'type' => 'eq',
                                 'value' => 123,
-                            ]
-                        ]
-                    ]
-                ]
+                            ],
+                        ],
+                    ],
+                ],
             ],
             // ManyToMany relation
             [
@@ -152,10 +152,10 @@ class CollectionLinkTest extends PHPUnit_Framework_TestCase
                                 'field' => 'tags',
                                 'type' => 'ismemberof',
                                 'value' => 123,
-                            ]
-                        ]
-                    ]
-                ]
+                            ],
+                        ],
+                    ],
+                ],
             ],
             // ManyToMany inversed relation
             [
@@ -184,10 +184,10 @@ class CollectionLinkTest extends PHPUnit_Framework_TestCase
                                 'field' => 'posts',
                                 'type' => 'ismemberof',
                                 'value' => 123,
-                            ]
-                        ]
-                    ]
-                ]
+                            ],
+                        ],
+                    ],
+                ],
             ],
         ];
     }

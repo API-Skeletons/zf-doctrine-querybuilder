@@ -16,7 +16,7 @@ use Doctrine\ODM\MongoDB\Mapping\ClassMetadata as Metadata;
 
 class ODMFilterManager extends AbstractPluginManager
 {
-    protected $invokableClasses = array();
+    protected $invokableClasses = [];
     protected $instanceOf = FilterInterface::class;
 
     public function filter(QueryBuilder $queryBuilder, Metadata $metadata, $filters)
@@ -29,7 +29,7 @@ class ODMFilterManager extends AbstractPluginManager
             // @codeCoverageIgnoreEnd
 
             try {
-                $filter = $this->get(strtolower($option['type']), array($this));
+                $filter = $this->get(strtolower($option['type']), [$this]);
             } catch (InvalidServiceException $e) {
                 // @codeCoverageIgnoreStart
                 return new ApiProblem(500, $e->getMessage());

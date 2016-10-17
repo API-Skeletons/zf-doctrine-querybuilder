@@ -69,13 +69,13 @@ class ORMOrderByTest extends AbstractHttpControllerTestCase
 
     public function testField()
     {
-        $orderBy = array(
-            array(
+        $orderBy = [
+            [
                 'type' => 'field',
                 'field' => 'name',
                 'direction' => 'desc',
-            ),
-        );
+            ],
+        ];
 
         $result = $this->fetchResult($orderBy);
         $artist = reset($result);
@@ -83,13 +83,13 @@ class ORMOrderByTest extends AbstractHttpControllerTestCase
         $this->assertEquals('Ekoostic Hookah', $artist->getName());
 
 
-        $orderBy = array(
-            array(
+        $orderBy = [
+            [
                 'type' => 'field',
                 'field' => 'name',
                 'direction' => 'asc',
-            ),
-        );
+            ],
+        ];
 
         $result = $this->fetchResult($orderBy);
         $artist = reset($result);

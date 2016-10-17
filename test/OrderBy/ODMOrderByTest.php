@@ -72,9 +72,9 @@ class ODMOrderByTest extends AbstractHttpControllerTestCase
 
     public function testField()
     {
-        $orderBy = array(
-            array('type' =>'field', 'field' => 'name', 'direction' => 'asc'),
-        );
+        $orderBy = [
+            ['type' => 'field', 'field' => 'name', 'direction' => 'asc'],
+        ];
 
         $result = $this->fetchResult($orderBy);
         foreach ($result as $meta) {
@@ -83,9 +83,9 @@ class ODMOrderByTest extends AbstractHttpControllerTestCase
         }
 
 
-        $orderBy = array(
-            array('type' =>'field', 'field' => 'name', 'direction' => 'desc'),
-        );
+        $orderBy = [
+            ['type' => 'field', 'field' => 'name', 'direction' => 'desc'],
+        ];
 
         $result = $this->fetchResult($orderBy);
         foreach ($result as $meta) {

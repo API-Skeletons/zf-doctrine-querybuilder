@@ -2,28 +2,28 @@
 
 date_default_timezone_set('UTC');
 
-return array(
-    'doctrine' => array(
-        'connection' => array(
-            'orm_default' => array(
+return [
+    'doctrine' => [
+        'connection' => [
+            'orm_default' => [
                 'configuration' => 'orm_default',
                 'eventmanager'  => 'orm_default',
                 'driverClass'   => 'Doctrine\DBAL\Driver\PDOSqlite\Driver',
-                'params' => array(
+                'params' => [
                     'memory' => true,
-                ),
-            ),
-            'odm_default' => array(
+                ],
+            ],
+            'odm_default' => [
                 'server' => 'localhost',
                 'port' => '27017',
                 'user' => '',
                 'password' => '',
                 'dbname' => 'zf_doctrine_querybuilder_filter_test',
-            ),
-        ),
-    ),
-    'zf-doctrine-querybuilder-filter-orm' => array(
-        'invokables' => array(
+            ],
+        ],
+    ],
+    'zf-doctrine-querybuilder-filter-orm' => [
+        'invokables' => [
             'eq' => 'ZF\Doctrine\QueryBuilder\Filter\ORM\Equals',
             'neq' => 'ZF\Doctrine\QueryBuilder\Filter\ORM\NotEquals',
             'lt' => 'ZF\Doctrine\QueryBuilder\Filter\ORM\LessThan',
@@ -41,11 +41,11 @@ return array(
             'orx' => 'ZF\Doctrine\QueryBuilder\Filter\ORM\OrX',
             'andx' => 'ZF\Doctrine\QueryBuilder\Filter\ORM\AndX',
             'innerjoin' => 'ZF\Doctrine\QueryBuilder\Filter\ORM\InnerJoin',
-        ),
-    ),
+        ],
+    ],
 
-    'zf-doctrine-querybuilder-filter-odm' => array(
-        'invokables' => array(
+    'zf-doctrine-querybuilder-filter-odm' => [
+        'invokables' => [
             'eq' => 'ZF\Doctrine\QueryBuilder\Filter\ODM\Equals',
             'neq' => 'ZF\Doctrine\QueryBuilder\Filter\ODM\NotEquals',
             'lt' => 'ZF\Doctrine\QueryBuilder\Filter\ODM\LessThan',
@@ -59,6 +59,6 @@ return array(
             'between' => 'ZF\Doctrine\QueryBuilder\Filter\ODM\Between',
             'like' => 'ZF\Doctrine\QueryBuilder\Filter\ODM\Like',
             'regex' => 'ZF\Doctrine\QueryBuilder\Filter\ODM\Regex',
-        ),
-    ),
-);
+        ],
+    ],
+];

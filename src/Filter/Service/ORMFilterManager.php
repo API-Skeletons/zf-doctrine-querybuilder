@@ -15,7 +15,7 @@ use Doctrine\ORM\QueryBuilder;
 
 class ORMFilterManager extends AbstractPluginManager
 {
-    protected $invokableClasses = array();
+    protected $invokableClasses = [];
     protected $instanceOf = FilterInterface::class;
 
     public function filter(QueryBuilder $queryBuilder, $metadata, $filters)
@@ -27,7 +27,7 @@ class ORMFilterManager extends AbstractPluginManager
             }
             // @codeCoverageIgnoreEnd
 
-            $filter = $this->get(strtolower($option['type']), array($this));
+            $filter = $this->get(strtolower($option['type']), [$this]);
 
             $filter->filter($queryBuilder, $metadata, $option);
         }

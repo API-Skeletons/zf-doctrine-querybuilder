@@ -32,8 +32,8 @@ class CollectionLink extends AbstractCollectionStrategy implements StrategyInter
     public function extract($value)
     {
         $config = $this->getServiceManager()->get('Config');
-        if (!method_exists($value, 'getTypeClass')
-            || !isset($config['zf-hal']['metadata_map'][$value->getTypeClass()->name])) {
+        if (! method_exists($value, 'getTypeClass')
+            || ! isset($config['zf-hal']['metadata_map'][$value->getTypeClass()->name])) {
             return;
         }
 
@@ -46,7 +46,7 @@ class CollectionLink extends AbstractCollectionStrategy implements StrategyInter
 
         $link = new Link($filter($mapping['fieldName']));
         $link->setRoute($config['route_name']);
-        $link->setRouteParams(array('id' => null));
+        $link->setRouteParams(['id' => null]);
 
         if (isset($config['zf-doctrine-querybuilder-options']['filter_key'])) {
             $filterKey = $config['zf-doctrine-querybuilder-options']['filter_key'];
@@ -54,19 +54,19 @@ class CollectionLink extends AbstractCollectionStrategy implements StrategyInter
             $filterKey = 'filter';
         }
 
-        $filterValue = array(
+        $filterValue = [
             'field' => $mapping['mappedBy'] ? : $mapping['inversedBy'],
-            'type' =>isset($mapping['joinTable']) ? 'ismemberof' : 'eq',
+            'type' => isset($mapping['joinTable']) ? 'ismemberof' : 'eq',
             'value' => $value->getOwner()->getId(),
-        );
+        ];
 
-        $link->setRouteOptions(array(
-            'query' => array(
-                $filterKey => array(
+        $link->setRouteOptions([
+            'query' => [
+                $filterKey => [
                     $filterValue,
-                ),
-            ),
-        ));
+                ],
+            ],
+        ]);
 
         return $link;
     }

@@ -14,7 +14,7 @@ use Doctrine\ORM\QueryBuilder;
 
 class ORMOrderByManager extends AbstractPluginManager
 {
-    protected $invokableClasses = array();
+    protected $invokableClasses = [];
     protected $instanceOf = OrderByInterface::class;
 
     public function orderBy(QueryBuilder $queryBuilder, $metadata, $orderBy)
@@ -26,7 +26,7 @@ class ORMOrderByManager extends AbstractPluginManager
             }
             // @codeCoverageIgnoreEnd
 
-            $orderByHandler = $this->get(strtolower($option['type']), array($this));
+            $orderByHandler = $this->get(strtolower($option['type']), [$this]);
 
             $orderByHandler->orderBy($queryBuilder, $metadata, $option);
         }
