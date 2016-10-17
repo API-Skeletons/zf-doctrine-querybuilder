@@ -1,13 +1,16 @@
 <?php
+/**
+ * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
+ * @copyright Copyright (c) 2016 Zend Technologies USA Inc. (http://www.zend.com)
+ */
 
 namespace ZFTest\Doctrine\QueryBuilder\Filter;
 
-use Zend\Http\Request;
-use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 use DateTime;
 use DbMongo\Document;
+use ZFTest\Doctrine\QueryBuilder\TestCase;
 
-class ODMFilterTest extends AbstractHttpControllerTestCase
+class ODMFilterTest extends TestCase
 {
     private function countResult($filters, $entity = 'DbMongo\Document\Meta')
     {
