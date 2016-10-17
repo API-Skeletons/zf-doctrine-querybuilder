@@ -1,11 +1,3 @@
-vendor
-composer.lock
-composer.phar
-test/data
-test/code-coverage
-test/assets/module/*
-!test/assets/module/*Original
-test/build
-.buildpath
-.project
-.settings/
+vendor/
+clover.xml
+coveralls-upload.json
