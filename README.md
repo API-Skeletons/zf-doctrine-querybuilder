@@ -28,8 +28,8 @@ Installation
 
 Installation of this module uses composer. For composer documentation, please refer to [getcomposer.org](http://getcomposer.org/).
 
-``` console
-$ php composer.phar require zfcampus/zf-doctrine-querybuilder ^1.3
+```bash
+$ composer require zfcampus/zf-doctrine-querybuilder
 ```
 
 Once installed, add `ZF\Doctrine\QueryBuilder` to your list of modules inside
@@ -56,7 +56,7 @@ To enable all filters you may override the default query providers in zf-apigili
     'aliases' => [
         'default_orm' => 'ZF\Doctrine\QueryBuilder\Query\Provider\DefaultOrm',
         'default_odm' => 'ZF\Doctrine\QueryBuilder\Query\Provider\DefaultOdm',
-    ]
+    ],
 ],
 ```
 
@@ -68,36 +68,36 @@ Use
 
 Configuration example
 ```php
-    'zf-doctrine-querybuilder-orderby-orm' => array(
-        'invokables' => array(
+    'zf-doctrine-querybuilder-orderby-orm' => [
+        'invokables' => [
             'field' => 'ZF\Doctrine\QueryBuilder\OrderBy\ORM\Field',
-        ),
-    ),
-    'zf-doctrine-querybuilder-filter-orm' => array(
-        'invokables' => array(
+        ],
+    ],
+    'zf-doctrine-querybuilder-filter-orm' => [
+        'invokables' => [
             'eq' => 'ZF\Doctrine\QueryBuilder\Filter\ORM\Equals',
-        ),
-    ),
+        ],
+    ],
 ```
 
 Request example
 ```php
-$_GET = array(
-    'filter' => array(
-        array(
-            'type' => 'eq',
+$_GET = [
+    'filter' => [
+        [
+            'type'  => 'eq',
             'field' => 'name',
             'value' => 'Tom',
-        ),
-    ),
-    'order-by' => array(
-        array(
-            'type' => 'field',
-            'field' => 'startAt',
+        ],
+    ],
+    'order-by' => [
+        [
+            'type'      => 'field',
+            'field'     => 'startAt',
             'direction' => 'desc',
-        ),
-    ),
-);
+        ],
+    ],
+];
 ```
 
 Resource example
@@ -145,20 +145,20 @@ $(function() {
         type: "GET",
         data: {
             'filter': [
-            {
-                'field': 'cycle',
-                'where': 'or',
-                'type': 'between',
-                'from': '1',
-                'to': '100'
-            },
-            {
-                'field': 'cycle',
-                'where': 'or',
-                'type': 'gte',
-                'value': '1000'
-            }
-        ]
+                {
+                    'field': 'cycle',
+                    'where': 'or',
+                    'type': 'between',
+                    'from': '1',
+                    'to': '100'
+                },
+                {
+                    'field': 'cycle',
+                    'where': 'or',
+                    'type': 'gte',
+                    'value': '1000'
+                }
+            ]
         },
         dataType: "json"
     });
@@ -198,7 +198,7 @@ class UserGroup {}
 find all users that belong to UserGroup id #1 by querying the user resource with the following filter:
 
 ```php
-    array('type' => 'eq', 'field' => 'group', 'value' => '1')
+    ['type' => 'eq', 'field' => 'group', 'value' => '1']
 ```
 
 ### Collection valued
@@ -220,7 +220,7 @@ class User {
 find all users that belong to UserGroup id #1 by querying the user resource with the following filter:
 
 ```php
-    array('type' => 'ismemberof', 'field' => 'groups', 'value' => '1')
+    ['type' => 'ismemberof', 'field' => 'groups', 'value' => '1']
 ```
 
 Format of Date Fields
@@ -248,24 +248,24 @@ This example joins the report field through the inner join already defined on th
 for `r.id = 2`:
 
 ```php
-    array('type' => 'innerjoin', 'field' => 'report', 'alias' => 'r'),
-    array('type' => 'eq', 'alias' => 'r', 'field' => 'id', 'value' => '2')
+    ['type' => 'innerjoin', 'field' => 'report', 'alias' => 'r'],
+    ['type' => 'eq', 'alias' => 'r', 'field' => 'id', 'value' => '2']
 ```
 
 You can inner join tables from an inner join using `parentAlias`:
 
 ```php
-    array('type' => 'innerjoin', 'parentAlias' => 'r', 'field' => 'owner', 'alias' => 'o'),
+    ['type' => 'innerjoin', 'parentAlias' => 'r', 'field' => 'owner', 'alias' => 'o'],
 ```
 
 To enable inner join add this to your configuration.
 
 ```php
-    'zf-doctrine-querybuilder-filter-orm' => array(
-        'invokables' => array(
+    'zf-doctrine-querybuilder-filter-orm' => [
+        'invokables' => [
             'innerjoin' => 'ZF\Doctrine\QueryBuilder\Filter\ORM\InnerJoin',
-        ),
-    ),
+        ],
+    ],
 ```
 
 
@@ -277,49 +277,49 @@ Included Filter Types
 Equals:
 
 ```php
-array('type' => 'eq', 'field' => 'fieldName', 'value' => 'matchValue')
+['type' => 'eq', 'field' => 'fieldName', 'value' => 'matchValue']
 ```
 
 Not Equals:
 
 ```php
-array('type' => 'neq', 'field' => 'fieldName', 'value' => 'matchValue')
+['type' => 'neq', 'field' => 'fieldName', 'value' => 'matchValue']
 ```
 
 Less Than:
 
 ```php
-array('type' => 'lt', 'field' => 'fieldName', 'value' => 'matchValue')
+['type' => 'lt', 'field' => 'fieldName', 'value' => 'matchValue']
 ```
 
 Less Than or Equals:
 
 ```php
-array('type' => 'lte', 'field' => 'fieldName', 'value' => 'matchValue')
+['type' => 'lte', 'field' => 'fieldName', 'value' => 'matchValue']
 ```
 
 Greater Than:
 
 ```php
-array('type' => 'gt', 'field' => 'fieldName', 'value' => 'matchValue')
+['type' => 'gt', 'field' => 'fieldName', 'value' => 'matchValue']
 ```
 
 Greater Than or Equals:
 
 ```php
-array('type' => 'gte', 'field' => 'fieldName', 'value' => 'matchValue')
+['type' => 'gte', 'field' => 'fieldName', 'value' => 'matchValue']
 ```
 
 Is Null:
 
 ```php
-array('type' => 'isnull', 'field' => 'fieldName')
+['type' => 'isnull', 'field' => 'fieldName']
 ```
 
 Is Not Null:
 
 ```php
-array('type' => 'isnotnull', 'field' => 'fieldName')
+['type' => 'isnotnull', 'field' => 'fieldName']
 ```
 
 Note: Dates in the In and NotIn filters are not handled as dates.  It is recommended you use multiple Equals statements instead of these filters for date datatypes.
@@ -327,25 +327,25 @@ Note: Dates in the In and NotIn filters are not handled as dates.  It is recomme
 In:
 
 ```php
-array('type' => 'in', 'field' => 'fieldName', 'values' => array(1, 2, 3))
+['type' => 'in', 'field' => 'fieldName', 'values' => [1, 2, 3]]
 ```
 
 NotIn:
 
 ```php
-array('type' => 'notin', 'field' => 'fieldName', 'values' => array(1, 2, 3))
+['type' => 'notin', 'field' => 'fieldName', 'values' => [1, 2, 3]]
 ```
 
 Between:
 
 ```php
-array('type' => 'between', 'field' => 'fieldName', 'from' => 'startValue', 'to' => 'endValue')
+['type' => 'between', 'field' => 'fieldName', 'from' => 'startValue', 'to' => 'endValue']
 ```
 
 Like (`%` is used as a wildcard):
 
 ```php
-array('type' => 'like', 'field' => 'fieldName', 'value' => 'like%search')
+['type' => 'like', 'field' => 'fieldName', 'value' => 'like%search']
 ```
 
 ### ORM Only
@@ -353,7 +353,7 @@ array('type' => 'like', 'field' => 'fieldName', 'value' => 'like%search')
 Is Member Of:
 
 ```php
-array('type' => 'ismemberof', 'field' => 'fieldName', 'value' => 1)
+['type' => 'ismemberof', 'field' => 'fieldName', 'value' => 1]
 ```
 
 AndX:
@@ -363,14 +363,14 @@ here.  The join will always be `and` so the `where` parameter inside of conditio
 ignored.  The `where` parameter on the AndX filter type is not ignored.
 
 ```php
-array(
+[
     'type' => 'andx',
-    'conditions' => array(
-        array('field' =>'name', 'type'=>'eq', 'value' => 'ArtistOne'),
-        array('field' =>'name', 'type'=>'eq', 'value' => 'ArtistTwo'),
-    ),
-    'where' => 'and'
-)
+    'conditions' => [
+        ['field' =>'name', 'type'=>'eq', 'value' => 'ArtistOne'],
+        ['field' =>'name', 'type'=>'eq', 'value' => 'ArtistTwo'],
+    ],
+    'where' => 'and',
+]
 ```
 
 OrX:
@@ -380,14 +380,14 @@ here.  The join will always be `or` so the `where` parameter inside of condition
 ignored.  The `where` parameter on the OrX filter type is not ignored.
 
 ```php
-array(
+[
     'type' => 'orx',
-    'conditions' => array(
-        array('field' =>'name', 'type'=>'eq', 'value' => 'ArtistOne'),
-        array('field' =>'name', 'type'=>'eq', 'value' => 'ArtistTwo'),
-    ),
-    'where' => 'and'
-)
+    'conditions' => [
+        ['field' =>'name', 'type'=>'eq', 'value' => 'ArtistOne'],
+        ['field' =>'name', 'type'=>'eq', 'value' => 'ArtistTwo'],
+    ],
+    'where' => 'and',
+]
 ```
 
 ### ODM Only
@@ -395,7 +395,7 @@ array(
 Regex:
 
 ```php
-array('type' => 'regex', 'field' => 'fieldName', 'value' => '/.*search.*/i')
+['type' => 'regex', 'field' => 'fieldName', 'value' => '/.*search.*/i']
 ```
 
 
@@ -405,6 +405,5 @@ Included Order By Type
 Field:
 
 ```php
-array('type' => 'field', 'field' => 'fieldName', 'direction' => 'desc');
+['type' => 'field', 'field' => 'fieldName', 'direction' => 'desc']
 ```
-
