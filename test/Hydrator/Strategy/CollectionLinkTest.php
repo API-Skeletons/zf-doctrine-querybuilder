@@ -6,7 +6,7 @@
 
 namespace ZFTest\Doctrine\QueryBuilder\Hydrator\Strategy;
 
-use \ZF\Doctrine\QueryBuilder\Hydrator\Strategy\CollectionLink;
+use ZF\Doctrine\QueryBuilder\Hydrator\Strategy\CollectionLink;
 use PHPUnit_Framework_TestCase;
 
 class CollectionLinkTest extends PHPUnit_Framework_TestCase

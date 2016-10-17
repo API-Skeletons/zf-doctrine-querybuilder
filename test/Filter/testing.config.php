@@ -4,13 +4,15 @@
  * @copyright Copyright (c) 2016 Zend Technologies USA Inc. (http://www.zend.com)
  */
 
+use Doctrine\DBAL\Driver\PDOSqlite\Driver;
+
 return [
     'doctrine' => [
         'connection' => [
             'orm_default' => [
                 'configuration' => 'orm_default',
                 'eventmanager'  => 'orm_default',
-                'driverClass'   => 'Doctrine\DBAL\Driver\PDOSqlite\Driver',
+                'driverClass'   => Driver::class,
                 'params' => [
                     'memory' => true,
                 ],

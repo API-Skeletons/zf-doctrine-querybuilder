@@ -1,51 +1,29 @@
 <?php
-/**
- * @license   http://opensource.org/licenses/BSD-3-Clause BSD-3-Clause
- * @copyright Copyright (c) 2016 Zend Technologies USA Inc. (http://www.zend.com)
- */
 
+namespace Db;
+
+use Doctrine\ORM\Mapping\Driver\XmlDriver;
 use Zend\ServiceManager\Factory\InvokableFactory;
 use ZF\Doctrine\QueryBuilder\Filter;
 
 return [
-    'doctrine' => [
-        'connection' => [
-            'orm_default' => [
-                'configuration' => 'orm_default',
-                'eventmanager'  => 'orm_default',
-                'driverClass'   => 'Doctrine\DBAL\Driver\PDOSqlite\Driver',
-                'params' => [
-                    'memory' => true,
-                ],
-            ],
-            'odm_default' => [
-                'server' => 'localhost',
-                'port' => '27017',
-                'user' => '',
-                'password' => '',
-                'dbname' => 'zf_doctrine_querybuilder_filter_test',
-            ],
-        ],
-    ],
     'zf-doctrine-querybuilder-filter-orm' => [
         'aliases' => [
-            'eq'         => Filter\ORM\Equals::class,
-            'neq'        => Filter\ORM\NotEquals::class,
-            'lt'         => Filter\ORM\LessThan::class,
-            'lte'        => Filter\ORM\LessThanOrEquals::class,
-            'gt'         => Filter\ORM\GreaterThan::class,
-            'gte'        => Filter\ORM\GreaterThanOrEquals::class,
-            'isnull'     => Filter\ORM\IsNull::class,
-            'isnotnull'  => Filter\ORM\IsNotNull::class,
-            'in'         => Filter\ORM\In::class,
-            'notin'      => Filter\ORM\NotIn::class,
-            'between'    => Filter\ORM\Between::class,
-            'like'       => Filter\ORM\Like::class,
-            'notlike'    => Filter\ORM\NotLike::class,
-            'ismemberof' => Filter\ORM\IsMemberOf::class,
-            'orx'        => Filter\ORM\OrX::class,
-            'andx'       => Filter\ORM\AndX::class,
-            'innerjoin'  => Filter\ORM\InnerJoin::class,
+            'eq'        => Filter\ORM\Equals::class,
+            'neq'       => Filter\ORM\NotEquals::class,
+            'lt'        => Filter\ORM\LessThan::class,
+            'lte'       => Filter\ORM\LessThanOrEquals::class,
+            'gt'        => Filter\ORM\GreaterThan::class,
+            'gte'       => Filter\ORM\GreaterThanOrEquals::class,
+            'isnull'    => Filter\ORM\IsNull::class,
+            'isnotnull' => Filter\ORM\IsNotNull::class,
+            'in'        => Filter\ORM\In::class,
+            'notin'     => Filter\ORM\NotIn::class,
+            'between'   => Filter\ORM\Between::class,
+            'like'      => Filter\ORM\Like::class,
+            'notlike'   => Filter\ORM\NotLike::class,
+            'orx'       => Filter\ORM\OrX::class,
+            'andx'      => Filter\ORM\AndX::class,
         ],
         'factories' => [
             Filter\ORM\Equals::class              => InvokableFactory::class,
@@ -61,10 +39,8 @@ return [
             Filter\ORM\Between::class             => InvokableFactory::class,
             Filter\ORM\Like::class                => InvokableFactory::class,
             Filter\ORM\NotLike::class             => InvokableFactory::class,
-            Filter\ORM\IsMemberOf::class          => InvokableFactory::class,
             Filter\ORM\OrX::class                 => InvokableFactory::class,
             Filter\ORM\AndX::class                => InvokableFactory::class,
-            Filter\ORM\InnerJoin::class           => InvokableFactory::class,
         ],
     ],
     'zf-doctrine-querybuilder-filter-odm' => [
@@ -97,6 +73,43 @@ return [
             Filter\ODM\Between::class             => InvokableFactory::class,
             Filter\ODM\Like::class                => InvokableFactory::class,
             Filter\ODM\Regex::class               => InvokableFactory::class,
+        ],
+    ],
+    'doctrine' => [
+        'driver' => [
+           'db_driver' => [
+                'class' => XmlDriver::class,
+                'paths' => [__DIR__ . '/xml'],
+            ],
+            'orm_default' => [
+                'drivers' => [
+                    __NAMESPACE__ . '\Entity' => 'db_driver',
+                ],
+            ],
+        ],
+    ],
+    'view_manager' => [
+        'display_not_found_reason' => true,
+        'display_exceptions' => true,
+        'json_exceptions' => [
+            'display' => true,
+            'ajax_only' => true,
+            'show_trace' => true,
+        ],
+        'doctype'            => 'HTML5',
+        'not_found_template' => 'error/404',
+        'exception_template' => 'error/index',
+        'template_map' => [
+            'layout/layout'           => __DIR__ . '/../view/layout/layout.phtml',
+            'application/index/index' => __DIR__ . '/../view/application/index/index.phtml',
+            'error/404'               => __DIR__ . '/../view/error/404.phtml',
+            'error/index'             => __DIR__ . '/../view/error/index.phtml',
+        ],
+        'template_path_stack' => [
+            __DIR__ . '/../view',
+        ],
+        'strategies' => [
+            'ViewJsonStrategy',
         ],
     ],
 ];

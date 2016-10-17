@@ -19,8 +19,8 @@ return [
         ],
         'module_paths' => [
             __DIR__ . '/../vendor',
-            'DbMongo' => __DIR__ . '/module/DbMongo',
-            'Db' => __DIR__ . '/module/Db',
+            'DbMongo' => __DIR__ . '/../assets/module/DbMongo',
+            'Db' => __DIR__ . '/../assets/module/Db',
             'ZF\Doctrine\QueryBuilder' => __DIR__ . '/../../',
         ],
     ],
