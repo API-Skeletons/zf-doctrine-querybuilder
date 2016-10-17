@@ -7,6 +7,7 @@
 namespace ZF\Doctrine\QueryBuilder;
 
 use Zend\ModuleManager\Feature\DependencyIndicatorInterface;
+use Zend\ModuleManager\Listener\ServiceListener;
 use Zend\ModuleManager\ModuleManager;
 
 class Module implements DependencyIndicatorInterface
@@ -19,32 +20,33 @@ class Module implements DependencyIndicatorInterface
     public function init(ModuleManager $moduleManager)
     {
         $serviceManager  = $moduleManager->getEvent()->getParam('ServiceManager');
+        /** @var ServiceListener $serviceListener */
         $serviceListener = $serviceManager->get('ServiceListener');
 
         $serviceListener->addServiceManager(
             'ZfDoctrineQueryBuilderFilterManagerOrm',
             'zf-doctrine-querybuilder-filter-orm',
-            'ZF\Doctrine\QueryBuilder\Filter\FilterInterface',
+            Filter\FilterInterface::class,
             'getDoctrineQueryBuilderFilterOrmConfig'
         );
 
         $serviceListener->addServiceManager(
             'ZfDoctrineQueryBuilderFilterManagerOdm',
             'zf-doctrine-querybuilder-filter-odm',
-            'ZF\Doctrine\QueryBuilder\Filter\FilterInterface',
+            Filter\FilterInterface::class,
             'getDoctrineQueryBuilderFilterOdmConfig'
         );
 
         $serviceListener->addServiceManager(
             'ZfDoctrineQueryBuilderOrderByManagerOrm',
             'zf-doctrine-querybuilder-orderby-orm',
-            'ZF\Doctrine\QueryBuilder\OrderBy\OrderByInterface',
+            OrderBy\OrderByInterface::class,
             'getDoctrineQueryBuilderOrderByOrmConfig'
         );
         $serviceListener->addServiceManager(
             'ZfDoctrineQueryBuilderOrderByManagerOdm',
             'zf-doctrine-querybuilder-orderby-odm',
-            'ZF\Doctrine\QueryBuilder\OrderBy\OrderByInterface',
+            OrderBy\OrderByInterface::class,
             'getDoctrineQueryBuilderOrderByOdmConfig'
         );
     }

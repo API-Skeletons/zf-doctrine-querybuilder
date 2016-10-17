@@ -20,11 +20,9 @@ class ORMOrderByManager extends AbstractPluginManager
     public function orderBy(QueryBuilder $queryBuilder, $metadata, $orderBy)
     {
         foreach ($orderBy as $option) {
-            if (! isset($option['type']) or ! $option['type']) {
-                // @codeCoverageIgnoreStart
+            if (! isset($option['type']) || ! $option['type']) {
                 throw new RuntimeException('Array element "type" is required for all orderby directives');
             }
-            // @codeCoverageIgnoreEnd
 
             $orderByHandler = $this->get(strtolower($option['type']), [$this]);
 

@@ -19,7 +19,6 @@ class DefaultOrmFactory implements FactoryInterface
      * @param ContainerInterface $container
      * @param                    $requestedName
      * @param array|null         $options
-     *
      * @return DefaultOrm
      */
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
@@ -38,11 +37,11 @@ class DefaultOrmFactory implements FactoryInterface
         }
         return new DefaultOrm($filterManager, $orderByManager, $options);
     }
+
     /**
      * Create service
      *
      * @param ServiceLocatorInterface $serviceLocator
-     *
      * @return mixed
      */
     public function createService(ServiceLocatorInterface $serviceLocator)

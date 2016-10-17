@@ -19,10 +19,12 @@ class DefaultOdm extends AbstractQueryProvider implements QueryProviderInterface
      * @var ODMFilterManager
      */
     private $filterManager;
+
     /**
      * @var ODMOrderByManager
      */
     private $orderByManager;
+
     /**
      * @var array
      */
@@ -67,8 +69,7 @@ class DefaultOdm extends AbstractQueryProvider implements QueryProviderInterface
     }
 
     /**
-     * @param   $queryBuilder
-     *
+     * @param $queryBuilder
      * @return DoctrineOdmAdapter
      */
     public function getPaginatedQuery($queryBuilder)
@@ -79,8 +80,7 @@ class DefaultOdm extends AbstractQueryProvider implements QueryProviderInterface
     }
 
     /**
-     * @param   $entityClass
-     *
+     * @param $entityClass
      * @return int
      */
     public function getCollectionTotal($entityClass)

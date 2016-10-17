@@ -25,4 +25,5 @@
     <file>config</file>
     <file>src</file>
     <file>test</file>
+    <file>config/zf-doctrine-querybuilder.global.php.dist</file>
 </ruleset>

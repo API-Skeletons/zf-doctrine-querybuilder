@@ -37,7 +37,8 @@ class CollectionLink extends AbstractCollectionStrategy implements StrategyInter
     {
         $config = $this->getServiceManager()->get('Config');
         if (! method_exists($value, 'getTypeClass')
-            || ! isset($config['zf-hal']['metadata_map'][$value->getTypeClass()->name])) {
+            || ! isset($config['zf-hal']['metadata_map'][$value->getTypeClass()->name])
+        ) {
             return;
         }
 

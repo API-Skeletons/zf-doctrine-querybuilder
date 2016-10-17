@@ -4,22 +4,21 @@
  * @copyright Copyright (c) 2013-2016 Zend Technologies USA Inc. (http://www.zend.com)
  */
 
-use ZF\Doctrine\QueryBuilder\Filter\Service as FilterService;
-use ZF\Doctrine\QueryBuilder\OrderBy\Service as OrderService;
+namespace ZF\Doctrine\QueryBuilder;
 
 return [
     'service_manager' => [
-        'factories' => [
-            FilterService\ORMFilterManager::class => FilterService\ORMFilterManagerFactory::class,
-            FilterService\ODMFilterManager::class => FilterService\ODMFilterManagerFactory::class,
-            OrderService\ORMOrderByManager::class => OrderService\ORMOrderByManagerFactory::class,
-            OrderService\ODMOrderByManager::class => OrderService\ODMOrderByManagerFactory::class,
-        ],
         'aliases' => [
-            'ZfDoctrineQueryBuilderFilterManagerOrm' => FilterService\ORMFilterManager::class,
-            'ZfDoctrineQueryBuilderFilterManagerOdm' => FilterService\ODMFilterManager::class,
-            'ZfDoctrineQueryBuilderOrderByManagerOrm' => OrderService\ORMOrderByManager::class,
-            'ZfDoctrineQueryBuilderOrderByManagerOdm' => OrderService\ODMOrderByManager::class,
+            'ZfDoctrineQueryBuilderFilterManagerOrm' => Filter\Service\ORMFilterManager::class,
+            'ZfDoctrineQueryBuilderFilterManagerOdm' => Filter\Service\ODMFilterManager::class,
+            'ZfDoctrineQueryBuilderOrderByManagerOrm' => OrderBy\Service\ORMOrderByManager::class,
+            'ZfDoctrineQueryBuilderOrderByManagerOdm' => OrderBy\Service\ODMOrderByManager::class,
+        ],
+        'factories' => [
+            Filter\Service\ORMFilterManager::class => Filter\Service\ORMFilterManagerFactory::class,
+            Filter\Service\ODMFilterManager::class => Filter\Service\ODMFilterManagerFactory::class,
+            OrderBy\Service\ORMOrderByManager::class => OrderBy\Service\ORMOrderByManagerFactory::class,
+            OrderBy\Service\ODMOrderByManager::class => OrderBy\Service\ODMOrderByManagerFactory::class,
         ],
     ],
 ];

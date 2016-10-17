@@ -22,20 +22,16 @@ class ODMFilterManager extends AbstractPluginManager
     public function filter(QueryBuilder $queryBuilder, Metadata $metadata, $filters)
     {
         foreach ($filters as $option) {
-            if (! isset($option['type']) or ! $option['type']) {
-                // @codeCoverageIgnoreStart
+            if (! isset($option['type']) || ! $option['type']) {
                 return new ApiProblem(500, 'Array element "type" is required for all filters');
             }
-            // @codeCoverageIgnoreEnd
 
             try {
                 $filter = $this->get(strtolower($option['type']), [$this]);
             } catch (InvalidServiceException $e) {
-                // @codeCoverageIgnoreStart
                 return new ApiProblem(500, $e->getMessage());
             }
 
-            // @codeCoverageIgnoreEnd
             $filter->filter($queryBuilder, $metadata, $option);
         }
     }
@@ -44,7 +40,7 @@ class ODMFilterManager extends AbstractPluginManager
      * @param mixed $filter
      *
      * @return void
-     * @throws Exception\RuntimeException
+     * @throws InvalidServiceException
      */
     public function validate($filter)
     {
@@ -61,7 +57,7 @@ class ODMFilterManager extends AbstractPluginManager
      * @param mixed $filter
      *
      * @return void
-     * @throws Exception\RuntimeException
+     * @throws InvalidServiceException
      */
     public function validatePlugin($filter)
     {

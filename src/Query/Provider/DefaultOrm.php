@@ -23,10 +23,12 @@ class DefaultOrm extends AbstractQueryProvider implements QueryProviderInterface
      * @var ORMFilterManager
      */
     private $filterManager;
+
     /**
      * @var ORMOrderByManager
      */
     private $orderByManager;
+
     /**
      * @var array
      */
@@ -43,7 +45,6 @@ class DefaultOrm extends AbstractQueryProvider implements QueryProviderInterface
      * @param ResourceEvent $event
      * @param string        $entityClass
      * @param array         $parameters
-     *
      * @return mixed This will return an ORM or ODM Query\Builder
      */
     public function createQuery(ResourceEvent $event, $entityClass, $parameters)
