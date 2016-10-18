@@ -14,6 +14,9 @@ use Doctrine\ORM\QueryBuilder;
 
 class ORMOrderByManager extends AbstractPluginManager
 {
+    /**
+     * @var string
+     */
     protected $instanceOf = OrderByInterface::class;
 
     public function orderBy(QueryBuilder $queryBuilder, $metadata, $orderBy)
@@ -56,14 +59,14 @@ class ORMOrderByManager extends AbstractPluginManager
      *
      * Proxies to `validate()`.
      *
-     * @param mixed $orderBy
+     * @param mixed $instance
      * @return void
      * @throws Exception\InvalidArgumentException
      */
-    public function validatePlugin($orderBy)
+    public function validatePlugin($instance)
     {
         try {
-            $this->validate($orderBy);
+            $this->validate($instance);
         } catch (Exception\InvalidServiceException $e) {
             throw new Exception\InvalidArgumentException($e->getMessage(), $e->getCode(), $e);
         }
