@@ -6,59 +6,67 @@
 
 namespace ZF\Doctrine\QueryBuilder\Filter\Service;
 
-use RuntimeException;
-use ZF\Doctrine\QueryBuilder\Filter\FilterInterface;
-use Zend\ServiceManager\AbstractPluginManager;
-use Zend\ServiceManager\Exception\InvalidServiceException;
 use Doctrine\ORM\QueryBuilder;
+use RuntimeException;
+use Zend\ServiceManager\AbstractPluginManager;
+use Zend\ServiceManager\Exception;
+use ZF\Doctrine\QueryBuilder\Filter\FilterInterface;
 
 class ORMFilterManager extends AbstractPluginManager
 {
-    protected $invokableClasses = [];
+    /**
+     * @var string
+     */
     protected $instanceOf = FilterInterface::class;
 
     public function filter(QueryBuilder $queryBuilder, $metadata, $filters)
     {
         foreach ($filters as $option) {
-            if (! isset($option['type']) || ! $option['type']) {
+            if (empty($option['type'])) {
                 throw new RuntimeException('Array element "type" is required for all filters');
             }
 
             $filter = $this->get(strtolower($option['type']), [$this]);
-
             $filter->filter($queryBuilder, $metadata, $option);
         }
     }
 
     /**
-     * @param mixed $filter
+     * Validate the plugin is of the expected type (v3).
      *
+     * Validates against `$instanceOf`.
+     *
+     * @param mixed $instance
      * @return void
-     * @throws InvalidServiceException
+     * @throws Exception\InvalidServiceException
      */
-    public function validate($filter)
+    public function validate($instance)
     {
-        if (! $filter instanceof $this->instanceOf) {
-            throw new InvalidServiceException(sprintf(
-                'Invalid plugin "%s" created; not an instance of %s',
-                get_class($filter),
-                $this->instanceOf
+        if (! $instance instanceof $this->instanceOf) {
+            throw new Exception\InvalidServiceException(sprintf(
+                '%s can only create instances of %s; %s is invalid',
+                get_class($this),
+                $this->instanceOf,
+                is_object($instance) ? get_class($instance) : gettype($instance)
             ));
         }
     }
 
     /**
-     * @param mixed $filter
+     * Validate the plugin is of the expected type (v2).
      *
+     * Proxies to `validate()`.
+     *
+     * @param mixed $instance
      * @return void
-     * @throws RuntimeException
+     * @throws Exception\InvalidArgumentException
      */
-    public function validatePlugin($filter)
+    public function validatePlugin($instance)
     {
         try {
-            $this->validate($filter);
-        } catch (InvalidServiceException $e) {
-            throw new RuntimeException($e->getMessage(), $e->getCode(), $e);
+            $this->validate($instance);
+        } catch (Exception\InvalidServiceException $e) {
+            throw new Exception\InvalidArgumentException($e->getMessage(), $e->getCode(), $e);
         }
     }
 }

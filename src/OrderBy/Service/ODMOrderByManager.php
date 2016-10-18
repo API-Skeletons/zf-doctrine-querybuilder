@@ -6,59 +6,67 @@
 
 namespace ZF\Doctrine\QueryBuilder\OrderBy\Service;
 
+use Doctrine\ODM\MongoDB\Query\Builder as QueryBuilder;
 use RuntimeException;
-use ZF\Doctrine\QueryBuilder\OrderBy\OrderByInterface;
 use Zend\ServiceManager\AbstractPluginManager;
-use Zend\ServiceManager\Exception\InvalidServiceException;
-use Doctrine\ODM\MongoDB\Query\Builder;
+use Zend\ServiceManager\Exception;
+use ZF\Doctrine\QueryBuilder\OrderBy\OrderByInterface;
 
 class ODMOrderByManager extends AbstractPluginManager
 {
-    protected $invokableClasses = [];
+    /**
+     * @var string
+     */
     protected $instanceOf = OrderByInterface::class;
 
-    public function orderBy(Builder $queryBuilder, $metadata, $orderBy)
+    public function orderBy(QueryBuilder $queryBuilder, $metadata, $orderBy)
     {
         foreach ($orderBy as $option) {
-            if (! isset($option['type']) || ! $option['type']) {
+            if (empty($option['type'])) {
                 throw new RuntimeException('Array element "type" is required for all orderby directives');
             }
 
             $orderByHandler = $this->get(strtolower($option['type']), [$this]);
-
             $orderByHandler->orderBy($queryBuilder, $metadata, $option);
         }
     }
 
     /**
-     * @param mixed $orderBy
+     * Validate the plugin is of the expected type (v3).
      *
+     * Validates against `$instanceOf`.
+     *
+     * @param mixed $instance
      * @return void
-     * @throws InvalidServiceException
+     * @throws Exception\InvalidServiceException
      */
-    public function validate($orderBy)
+    public function validate($instance)
     {
-        if (! $orderBy instanceof $this->instanceOf) {
-            throw new InvalidServiceException(sprintf(
-                'Invalid plugin "%s" created; not an instance of %s',
-                get_class($orderBy),
-                $this->instanceOf
+        if (! $instance instanceof $this->instanceOf) {
+            throw new Exception\InvalidServiceException(sprintf(
+                '%s can only create instances of %s; %s is invalid',
+                get_class($this),
+                $this->instanceOf,
+                is_object($instance) ? get_class($instance) : gettype($instance)
             ));
         }
     }
 
     /**
-     * @param mixed $orderBy
+     * Validate the plugin is of the expected type (v2).
      *
+     * Proxies to `validate()`.
+     *
+     * @param mixed $instance
      * @return void
-     * @throws RuntimeException
+     * @throws Exception\InvalidArgumentException
      */
-    public function validatePlugin($orderBy)
+    public function validatePlugin($instance)
     {
         try {
-            $this->validate($orderBy);
-        } catch (InvalidServiceException $e) {
-            throw new RuntimeException($e->getMessage(), $e->getCode(), $e);
+            $this->validate($instance);
+        } catch (Exception\InvalidServiceException $e) {
+            throw new Exception\InvalidArgumentException($e->getMessage(), $e->getCode(), $e);
         }
     }
 }
