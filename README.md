@@ -39,7 +39,7 @@ Once installed, add `ZF\Doctrine\QueryBuilder` to your list of modules inside
 Configuring the Module
 ----------------------
 
-Copy `config/zf-doctrine-querybuilder.global.php.dist` to `config/autoload/zf-doctrine-querybuilder.global.php` and edit the list of invokables for orm and odm to those you want enabled by default.
+Copy `config/zf-doctrine-querybuilder.global.php.dist` to `config/autoload/zf-doctrine-querybuilder.global.php` and edit the list of aliases for orm and odm to those you want enabled by default.
 
 
 Use With Apigility Doctrine
@@ -49,13 +49,13 @@ To enable all filters you may override the default query providers in zf-apigili
 
 ```php
 'zf-apigility-doctrine-query-provider' => [
-    'factories' => [
-        'ZF\Doctrine\QueryBuilder\Query\Provider\DefaultOrm' => 'ZF\Doctrine\QueryBuilder\Query\Provider\Service\DefaultOrmFactory',
-        'ZF\Doctrine\QueryBuilder\Query\Provider\DefaultOdm' => 'ZF\Doctrine\QueryBuilder\Query\Provider\Service\DefaultOdmFactory',
-    ],
     'aliases' => [
-        'default_orm' => 'ZF\Doctrine\QueryBuilder\Query\Provider\DefaultOrm',
-        'default_odm' => 'ZF\Doctrine\QueryBuilder\Query\Provider\DefaultOdm',
+        'default_orm' => \ZF\Doctrine\QueryBuilder\Query\Provider\DefaultOrm::class,
+        'default_odm' => \ZF\Doctrine\QueryBuilder\Query\Provider\DefaultOdm::class,
+    ],
+    'factories' => [
+        \ZF\Doctrine\QueryBuilder\Query\Provider\DefaultOrm::class => \ZF\Doctrine\QueryBuilder\Query\Provider\Service\DefaultOrmFactory::class,
+        \ZF\Doctrine\QueryBuilder\Query\Provider\DefaultOdm::class => \ZF\Doctrine\QueryBuilder\Query\Provider\Service\DefaultOdmFactory::class,
     ],
 ],
 ```
@@ -69,13 +69,19 @@ Use
 Configuration example
 ```php
     'zf-doctrine-querybuilder-orderby-orm' => [
-        'invokables' => [
-            'field' => 'ZF\Doctrine\QueryBuilder\OrderBy\ORM\Field',
+        'aliases' => [
+            'field' => \ZF\Doctrine\QueryBuilder\OrderBy\ORM\Field::class,
+        ],
+        'factories' => [
+            \ZF\Doctrine\QueryBuilder\OrderBy\ORM\Field::class => \Zend\ServiceManager\Factory\InvokableFactory::class,
         ],
     ],
     'zf-doctrine-querybuilder-filter-orm' => [
-        'invokables' => [
-            'eq' => 'ZF\Doctrine\QueryBuilder\Filter\ORM\Equals',
+        'aliases' => [
+            'eq' => \ZF\Doctrine\QueryBuilder\Filter\ORM\Equals::class,
+        ],
+        'factories' => [
+            \ZF\Doctrine\QueryBuilder\Filter\ORM\Equals::class => \Zend\ServiceManager\Factory\InvokableFactory::class,
         ],
     ],
 ```
@@ -262,8 +268,11 @@ To enable inner join add this to your configuration.
 
 ```php
     'zf-doctrine-querybuilder-filter-orm' => [
-        'invokables' => [
-            'innerjoin' => 'ZF\Doctrine\QueryBuilder\Filter\ORM\InnerJoin',
+        'aliases' => [
+            'innerjoin' => \ZF\Doctrine\QueryBuilder\Filter\ORM\InnerJoin::class,
+        ],
+        'factories' => [
+            \ZF\Doctrine\QueryBuilder\Filter\ORM\InnerJoin => \Zend\ServiceManager\Factory\InvokableFactory::class,
         ],
     ],
 ```
@@ -400,7 +409,7 @@ Regex:
 
 
 Included Order By Type
----------------------
+----------------------
 
 Field:
 
