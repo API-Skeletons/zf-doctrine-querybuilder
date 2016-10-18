@@ -28,7 +28,7 @@ class DefaultOrmFactory implements FactoryInterface
         }
         $filterManager = $container->get(ORMFilterManager::class);
         $orderByManager = $container->get(ORMOrderByManager::class);
-        $config = $container->get('Config');
+        $config = $container->get('config');
         $options = [];
         if (isset($config['zf-doctrine-querybuilder-options'])
             && is_array($config['zf-doctrine-querybuilder-options'])

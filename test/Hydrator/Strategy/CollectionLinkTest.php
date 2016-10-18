@@ -59,7 +59,7 @@ class CollectionLinkTest extends PHPUnit_Framework_TestCase
         $mock = $this->getMock('Zend\ServiceManager\ServiceManager', ['get']);
         $mock->expects($this->any())
                 ->method('get')
-                ->with($this->equalTo('Config'))
+                ->with($this->equalTo('config'))
                 ->will($this->returnValue($config));
 
 

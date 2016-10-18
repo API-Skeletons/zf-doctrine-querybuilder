@@ -28,7 +28,7 @@ class DefaultOdmFactory implements FactoryInterface
         }
         $filterManager = $container->get(ODMFilterManager::class);
         $orderByManager = $container->get(ODMOrderByManager::class);
-        $config = $container->get('Config');
+        $config = $container->get('config');
         $options = [];
         if (isset($config['zf-doctrine-querybuilder-options'])
             && is_array($config['zf-doctrine-querybuilder-options'])
