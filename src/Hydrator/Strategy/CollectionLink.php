@@ -6,11 +6,11 @@
 
 namespace ZF\Doctrine\QueryBuilder\Hydrator\Strategy;
 
-use Zend\Hydrator\Strategy\StrategyInterface;
 use DoctrineModule\Stdlib\Hydrator\Strategy\AbstractCollectionStrategy;
-use ZF\Hal\Link\Link;
-use Zend\ServiceManager\ServiceManager;
 use Zend\Filter\FilterChain;
+use Zend\Hydrator\Strategy\StrategyInterface;
+use Zend\ServiceManager\ServiceManager;
+use ZF\Hal\Link\Link;
 
 /**
  * A field-specific hydrator for collections.

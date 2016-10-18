@@ -6,9 +6,9 @@
 
 namespace ZFTest\Doctrine\QueryBuilder\Filter;
 
-use Doctrine\ORM\Tools\SchemaTool;
 use DateTime;
 use Db\Entity;
+use Doctrine\ORM\Tools\SchemaTool;
 use ZFTest\Doctrine\QueryBuilder\TestCase;
 
 class ORMFilterTest extends TestCase

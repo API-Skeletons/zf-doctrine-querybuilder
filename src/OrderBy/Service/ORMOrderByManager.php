@@ -6,11 +6,11 @@
 
 namespace ZF\Doctrine\QueryBuilder\OrderBy\Service;
 
+use Doctrine\ORM\QueryBuilder;
 use RuntimeException;
-use ZF\Doctrine\QueryBuilder\OrderBy\OrderByInterface;
 use Zend\ServiceManager\AbstractPluginManager;
 use Zend\ServiceManager\Exception;
-use Doctrine\ORM\QueryBuilder;
+use ZF\Doctrine\QueryBuilder\OrderBy\OrderByInterface;
 
 class ORMOrderByManager extends AbstractPluginManager
 {

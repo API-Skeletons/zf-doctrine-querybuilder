@@ -7,9 +7,9 @@
 namespace ZF\Doctrine\QueryBuilder\Query\Provider;
 
 use Zend\ServiceManager\ServiceLocatorInterface;
+use ZF\Apigility\Doctrine\Server\Paginator\Adapter\DoctrineOdmAdapter;
 use ZF\Apigility\Doctrine\Server\Query\Provider\AbstractQueryProvider;
 use ZF\Apigility\Doctrine\Server\Query\Provider\QueryProviderInterface;
-use ZF\Apigility\Doctrine\Server\Paginator\Adapter\DoctrineOdmAdapter;
 use ZF\Doctrine\QueryBuilder\Filter\Service\ODMFilterManager;
 use ZF\Doctrine\QueryBuilder\OrderBy\Service\ODMOrderByManager;
 use ZF\Rest\ResourceEvent;
