@@ -9,6 +9,17 @@ namespace ZF\Doctrine\QueryBuilder;
 use Zend\ServiceManager\Factory\InvokableFactory;
 
 return [
+    // 'zf-apigility-doctrine-query-provider' => [
+    //     'aliases' => [
+    //         'default_orm' => Query\Provider\DefaultOrm::class,
+    //         'default_odm' => Query\Provider\DefaultOdm::class,
+    //     ],
+    //     'factories' => [
+    //         Query\Provider\DefaultOrm::class => Query\Provider\DefaultOrmFactory::class,
+    //         Query\Provider\DefaultOdm::class => Query\Provider\DefaultOdmFactory::class,
+    //     ],
+    // ],
+
     'zf-doctrine-querybuilder-options' => [
         'filter_key' => 'filter',
         'order_by_key' => 'order-by',

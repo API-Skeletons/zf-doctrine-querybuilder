@@ -6,46 +6,45 @@
 
 namespace ZF\Doctrine\QueryBuilder\Query\Provider;
 
+use Zend\ServiceManager\ServiceLocatorInterface;
 use ZF\Apigility\Doctrine\Server\Query\Provider\AbstractQueryProvider;
 use ZF\Apigility\Doctrine\Server\Query\Provider\QueryProviderInterface;
 use ZF\Doctrine\QueryBuilder\Filter\Service\ORMFilterManager;
 use ZF\Doctrine\QueryBuilder\OrderBy\Service\ORMOrderByManager;
 use ZF\Rest\ResourceEvent;
 
-/**
- * Class FetchAllOrm
- *
- * @package ZF\Apigility\Doctrine\Server\Query\Provider
- */
 class DefaultOrm extends AbstractQueryProvider implements QueryProviderInterface
 {
     /**
-     * @var ORMFilterManager
+     * @var ServiceLocatorInterface
      */
-    private $filterManager;
+    protected $serviceLocator;
 
     /**
-     * @var ORMOrderByManager
+     * Set service locator
+     *
+     * @param ServiceLocatorInterface $serviceLocator
+     * @return self
      */
-    private $orderByManager;
-
-    /**
-     * @var array
-     */
-    private $options;
-
-    public function __construct(ORMFilterManager $filterManager, ORMOrderByManager $orderByManager, array $options = [])
+    public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
     {
-        $this->filterManager = $filterManager;
-        $this->orderByManager = $orderByManager;
-        $this->options = $options;
+        $this->serviceLocator = $serviceLocator;
+
+        return $this;
     }
 
     /**
-     * @param ResourceEvent $event
-     * @param string        $entityClass
-     * @param array         $parameters
-     * @return mixed This will return an ORM or ODM Query\Builder
+     * Get service locator
+     *
+     * @return ServiceLocatorInterface
+     */
+    public function getServiceLocator()
+    {
+        return $this->serviceLocator;
+    }
+
+    /**
+     * {@inheritDoc}
      */
     public function createQuery(ResourceEvent $event, $entityClass, $parameters)
     {
@@ -56,7 +55,7 @@ class DefaultOrm extends AbstractQueryProvider implements QueryProviderInterface
 
         if (isset($request[$this->getFilterKey()])) {
             $metadata = $this->getObjectManager()->getClassMetadata($entityClass);
-            $this->filterManager->filter(
+            $this->getFilterManager()->filter(
                 $queryBuilder,
                 $metadata,
                 $request[$this->getFilterKey()]
@@ -65,7 +64,7 @@ class DefaultOrm extends AbstractQueryProvider implements QueryProviderInterface
 
         if (isset($request[$this->getOrderByKey()])) {
             $metadata = $this->getObjectManager()->getClassMetadata($entityClass);
-            $this->orderByManager->orderBy(
+            $this->getOrderByManager()->orderBy(
                 $queryBuilder,
                 $metadata,
                 $request[$this->getOrderByKey()]
@@ -80,13 +79,12 @@ class DefaultOrm extends AbstractQueryProvider implements QueryProviderInterface
      */
     protected function getFilterKey()
     {
-        if (isset($this->options['filter_key'])) {
-            $filterKey = $this->options['filter_key'];
-        } else {
-            $filterKey = 'filter';
+        $config = $this->getConfig();
+        if (isset($config['filter_key'])) {
+            return $config['filter_key'];
         }
 
-        return $filterKey;
+        return 'filter';
     }
 
     /**
@@ -94,12 +92,40 @@ class DefaultOrm extends AbstractQueryProvider implements QueryProviderInterface
      */
     protected function getOrderByKey()
     {
-        if (isset($this->options['order_by_key'])) {
-            $orderByKey = $this->options['order_by_key'];
-        } else {
-            $orderByKey = 'order-by';
+        $config = $this->getConfig();
+        if (isset($config['order_by_key'])) {
+            return $config['order_by_key'];
         }
 
-        return $orderByKey;
+        return 'order-by';
+    }
+
+    /**
+     * @return array
+     */
+    private function getConfig()
+    {
+        $config = $this->getServiceLocator()->get('config');
+        if (isset($config['zf-doctrine-querybuilder-options'])) {
+            return $config['zf-doctrine-querybuilder-options'];
+        }
+
+        return [];
+    }
+
+    /**
+     * @return ORMFilterManager
+     */
+    private function getFilterManager()
+    {
+        return $this->getServiceLocator()->get(ORMFilterManager::class);
+    }
+
+    /**
+     * @return ORMOrderByManager
+     */
+    private function getOrderByManager()
+    {
+        return $this->getServiceLocator()->get(ORMOrderByManager::class);
     }
 }

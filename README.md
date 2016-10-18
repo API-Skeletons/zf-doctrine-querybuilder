@@ -54,8 +54,8 @@ To enable all filters you may override the default query providers in zf-apigili
         'default_odm' => \ZF\Doctrine\QueryBuilder\Query\Provider\DefaultOdm::class,
     ],
     'factories' => [
-        \ZF\Doctrine\QueryBuilder\Query\Provider\DefaultOrm::class => \ZF\Doctrine\QueryBuilder\Query\Provider\Service\DefaultOrmFactory::class,
-        \ZF\Doctrine\QueryBuilder\Query\Provider\DefaultOdm::class => \ZF\Doctrine\QueryBuilder\Query\Provider\Service\DefaultOdmFactory::class,
+        \ZF\Doctrine\QueryBuilder\Query\Provider\DefaultOrm::class => \ZF\Doctrine\QueryBuilder\Query\Provider\DefaultOrmFactory::class,
+        \ZF\Doctrine\QueryBuilder\Query\Provider\DefaultOdm::class => \ZF\Doctrine\QueryBuilder\Query\Provider\DefaultOdmFactory::class,
     ],
 ],
 ```
