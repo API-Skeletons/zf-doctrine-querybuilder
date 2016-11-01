@@ -1,3 +1,4 @@
 vendor/
+phpunit.xml
 clover.xml
 coveralls-upload.json
