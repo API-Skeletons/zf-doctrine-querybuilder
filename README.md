@@ -80,9 +80,6 @@ through `zf-doctrine-querybuilder-options`:
 ],
 ```
 
-Or: to use with apigility doctrine events see
-[docs/apigility.example.php](https://github.com/zfcampus/zf-doctrine-querybuilder/blob/master/docs/apigility.example.php)
-
 
 Use
 ---
