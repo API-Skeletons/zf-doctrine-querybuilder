@@ -1,7 +1,7 @@
 ZF Doctrine QueryBuilder
 ========================
 
-[![Build status](https://api.travis-ci.org/zfcampus/zf-doctrine-querybuilder.svg)](http://travis-ci.org/zfcampus/zf-doctrine-querybuilder)
+[![Build status](https://api.travis-ci.org/zfcampus/zf-doctrine-querybuilder.svg)](https://secure.travis-ci.org/zfcampus/zf-doctrine-querybuilder)
 [![Coverage Status](https://coveralls.io/repos/github/zfcampus/zf-doctrine-querybuilder/badge.svg)](https://coveralls.io/github/zfcampus/zf-doctrine-querybuilder)
 [![Total Downloads](https://poser.pugx.org/zfcampus/zf-doctrine-querybuilder/downloads)](https://packagist.org/packages/zfcampus/zf-doctrine-querybuilder)
 
