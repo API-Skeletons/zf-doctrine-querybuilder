@@ -64,7 +64,6 @@ matrix:
       env:
         - DEPS=latest
   allow_failures:
-    - php: 7.1
     - php: hhvm
 
 notifications:
