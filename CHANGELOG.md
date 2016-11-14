@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 1.5.1 - TBD
+## 1.5.1 - 2016-11-14
 
 ### Added
 
@@ -18,7 +18,9 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- [#35](https://github.com/zfcampus/zf-doctrine-querybuilder/pull/35) fixes
+  an issue with `DefaultOdmFactory` and `DefaultOrmFactory` when used with
+  ZF2 with context of `AbstractPluginManager`.
 
 ## 1.5.0 - 2016-11-10
 
