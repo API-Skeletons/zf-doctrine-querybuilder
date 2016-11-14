@@ -14,7 +14,7 @@ use ZF\Doctrine\QueryBuilder\Query\Provider\DefaultOrmFactory;
 
 class DefaultOrmFactoryTest extends TestCase
 {
-    public function testInvokableFactoryReturnsDefaultOdmQueryProvider()
+    public function testInvokableFactoryReturnsDefaultOrmQueryProvider()
     {
         $serviceLocator = $this->prophesize(ServiceLocatorInterface::class)->reveal();
 
