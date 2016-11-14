@@ -7,6 +7,7 @@
 namespace ZF\Doctrine\QueryBuilder\Query\Provider;
 
 use Interop\Container\ContainerInterface;
+use Zend\ServiceManager\AbstractPluginManager;
 
 class DefaultOdmFactory
 {
@@ -18,6 +19,10 @@ class DefaultOdmFactory
      */
     public function __invoke(ContainerInterface $container)
     {
+        if ($container instanceof AbstractPluginManager) {
+            $container = $container->getServiceLocator() ?: $container;
+        }
+
         $provider = new DefaultOdm();
         $provider->setServiceLocator($container);
 
